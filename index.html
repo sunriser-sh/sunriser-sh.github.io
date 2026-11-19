@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sunriser — let agents run your infrastructure, safely</title>
+<meta name="description" content="Open tools for agents that deploy, secure and scale infrastructure. Guard every MCP call, scope every identity, keep every record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #171717;
+  --bg-2: #1e1e1e;
+  --line: #2a2a2a;
+  --fg: #ececea;
+  --dim: rgba(236, 236, 234, .42);
+  --mute: rgba(236, 236, 234, .62);
+  --sun: #ff5a1f;
+  --ok: #7fd18b;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 16px/1.5 Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+code, pre { font-family: var(--mono); }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 720px) { .wrap { padding: 0 16px; } }
+
+/* announcement */
+.bar { font-size: 13px; text-align: center; padding: 8px 16px; color: var(--mute); border-bottom: 1px solid var(--line); }
+.bar a { color: var(--sun); margin-left: 8px; }
+
+/* nav */
+nav { display: flex; align-items: center; gap: 32px; height: 64px; }
+.logo { font-weight: 500; font-size: 18px; letter-spacing: -.4px; display: flex; align-items: center; gap: 8px; }
+.logo i { width: 14px; height: 7px; background: var(--sun); border-radius: 14px 14px 0 0; display: inline-block; }
+nav .links { display: flex; gap: 28px; font-size: 14px; color: var(--mute); }
+nav .links a:hover { color: var(--fg); }
+nav .end { margin-left: auto; display: flex; gap: 8px; }
+@media (max-width: 720px) { nav .links { display: none; } }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; cursor: pointer; border: 0; font-family: inherit; }
+.btn.light { background: var(--fg); color: #111; }
+.btn.ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px #3a3a3a; }
+.btn.ghost:hover { box-shadow: inset 0 0 0 1px #5a5a5a; }
+
+/* type */
+h1, h2 { font-weight: 400; letter-spacing: -.026em; line-height: 1.15; }
+h1 { font-size: clamp(30px, 4.2vw, 44px); }
+h2 { font-size: clamp(28px, 3.6vw, 40px); }
+.dim { color: var(--dim); }
+.label { font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+
+/* hero */
+.hero { padding: 96px 0 48px; }
+.hero .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.install { font-family: var(--mono); font-size: 13px; font-weight: 400; }
+.install span { color: var(--dim); }
+
+/* product window */
+.stage { position: relative; margin-top: 8px; padding: 56px 0 0; overflow: hidden; }
+.stage::before { content: ""; position: absolute; inset: 0 0 35% 0; background: radial-gradient(120% 90% at 50% 100%, #ff7a2f 0%, #c8381a 30%, #3a1410 62%, transparent 80%); opacity: .9; }
+.win { position: relative; margin: 0 56px; background: #111; border-radius: 12px 12px 0 0; box-shadow: 0 0 0 1px #2c2c2c, 0 40px 80px rgba(0,0,0,.5); display: grid; grid-template-columns: 1fr 340px; min-height: 420px; font-size: 13px; }
+.win header { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-bottom: 1px solid var(--line); color: var(--mute); font-size: 12px; }
+.win header b { width: 12px; height: 12px; border-radius: 50%; background: #3a3a3a; }
+.win header span { margin-left: 12px; font-family: var(--mono); }
+.term { padding: 18px 20px; font: 12.5px/1.75 var(--mono); color: var(--mute); overflow-x: auto; white-space: pre; }
+.term .p { color: var(--fg); }
+.term .b { color: var(--sun); }
+.term .o { color: var(--ok); }
+.side { border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.msg { background: var(--bg-2); border-radius: 8px; padding: 12px; line-height: 1.55; color: var(--fg); }
+.msg.agent { background: none; padding: 0 2px; color: var(--mute); }
+.msg.agent em { font-style: normal; color: var(--sun); font-family: var(--mono); font-size: 12px; }
+.ask { margin-top: auto; background: var(--bg-2); border-radius: 8px; padding: 12px; color: var(--dim); }
+@media (max-width: 900px) {
+  .win { grid-template-columns: 1fr; margin: 0; }
+  .side { display: none; }
+  .stage { padding-top: 32px; }
+}
+
+/* setup */
+.setup { display: grid; grid-template-columns: 320px 1fr; gap: 56px; padding-top: 72px; }
+.setup + .setup { padding-top: 48px; }
+.setup-copy h3 { margin-top: 10px; }
+.setup-copy h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; }
+.setup-copy p { color: var(--mute); margin-top: 10px; }
+.setup-copy code { font-size: 13px; }
+.add, .panel b { color: var(--sun); font-weight: 400; }
+.tabs { display: flex; gap: 24px; font-size: 15px; color: var(--dim); }
+.tabs button { background: none; border: 0; color: inherit; font: inherit; padding: 0 0 8px; cursor: pointer; }
+.tabs button:hover { color: var(--mute); }
+.tabs button[aria-selected="true"] { color: var(--fg); box-shadow: inset 0 -1px 0 var(--fg); }
+.panel { margin-top: 16px; background: #111; border-radius: 10px; overflow: hidden; }
+.panel[hidden] { display: none; }
+.panel header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; font: 12px var(--mono); color: var(--dim); background: #141414; }
+.panel pre { margin: 0; padding: 20px; font: 13px/1.8 var(--mono); color: var(--fg); overflow-x: auto; }
+.panel s { text-decoration: none; color: var(--dim); }
+.copy { background: none; border: 0; color: var(--mute); font: 500 12px Inter, sans-serif; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+.copy:hover { background: #222; color: var(--fg); }
+:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; border-radius: 4px; }
+.setup > div { min-width: 0; }
+.term, .panel pre, .json { scrollbar-width: thin; scrollbar-color: #333 transparent; }
+@media (max-width: 900px) { .setup { grid-template-columns: 1fr; gap: 28px; padding-top: 48px; } }
+
+/* pillars */
+section { padding: 120px 0 0; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 56px; border-top: 1px solid var(--line); }
+.pillars div { padding: 28px 28px 0 0; }
+.pillars div + div { padding-left: 28px; border-left: 1px solid var(--line); }
+.pillars h3 { font-weight: 500; font-size: 16px; margin: 14px 0 6px; }
+.pillars p { color: var(--mute); font-size: 15px; }
+@media (max-width: 800px) {
+  .pillars { grid-template-columns: 1fr; }
+  .pillars div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); margin-top: 28px; }
+}
+
+/* product family */
+.family { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0 32px; margin-top: 56px; }
+.family a { display: block; padding-top: 24px; border-top: 1px solid var(--line); }
+.family a:hover h3 { color: var(--sun); }
+.family h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; margin: 14px 0 8px; }
+.family p { color: var(--mute); font-size: 15px; }
+.tag { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.tag.on { color: var(--ok); }
+@media (max-width: 1000px) { .family { grid-template-columns: 1fr 1fr; gap: 40px 32px; } }
+@media (max-width: 600px) { .family { grid-template-columns: 1fr; gap: 32px; } }
+h2 .tag { vertical-align: middle; margin-left: 12px; }
+
+/* ascii sunrise block */
+.sunblock { position: relative; background: var(--sun); color: #fff; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; }
+.sunblock pre { position: absolute; inset: 0; font: 12px/14px var(--mono); color: rgba(255,255,255,.78); white-space: pre; overflow: hidden; user-select: none; }
+.sunblock .copy { position: relative; padding: 40px; max-width: 680px; }
+.sunblock h2 { font-weight: 500; letter-spacing: -.035em; }
+.sunblock p { margin-top: 12px; font-weight: 500; font-size: 15px; }
+@media (max-width: 720px) { .sunblock .copy { padding: 24px 16px; } }
+
+/* record */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 32px; } }
+.fields { display: grid; grid-template-columns: max-content 1fr; gap: 14px 24px; font-size: 15px; color: var(--mute); }
+.fields code { color: var(--fg); font-size: 13px; padding-top: 2px; }
+.json { font: 13px/1.8 var(--mono); color: var(--mute); background: #111; border-radius: 10px; padding: 20px; overflow-x: auto; white-space: pre; align-self: start; }
+.json .k { color: var(--fg); }
+.json .b { color: var(--sun); }
+
+/* agents list */
+.rows { margin-top: 48px; border-top: 1px solid var(--line); }
+.rows div { display: grid; grid-template-columns: 320px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.rows code { font-size: 14px; }
+.rows p { color: var(--mute); }
+@media (max-width: 720px) { .rows div { grid-template-columns: 1fr; gap: 6px; } }
+
+/* closing */
+.closing { padding: 160px 0 120px; }
+.closing .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+footer { border-top: 1px solid var(--line); padding: 28px 0 48px; font-size: 13px; color: var(--dim); display: flex; gap: 24px; flex-wrap: wrap; }
+footer a:hover { color: var(--fg); }
+footer .end { margin-left: auto; }
+</style>
+</head>
+<body>
+
+<div class="bar">Guard is out. Warrant, hub and advisories are on the way.<a href="https://github.com/sunriser-sh/sunriser">Star on GitHub →</a></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="/"><i></i>sunriser</a>
+    <div class="links">
+      <a href="#products">Products</a>
+      <a href="#guard">Guard</a>
+      <a href="#warrant">Warrant</a>
+      <a href="#agents">For agents</a>
+      <a href="https://github.com/sunriser-sh/sunriser#readme">Docs</a>
+    </div>
+    <div class="end">
+      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser">GitHub</a>
+      <button class="btn light" data-copy>Install</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Let your agents deploy and scale infrastructure<br><span class="dim">Keep every call guarded, scoped and on the record.</span></h1>
+    <div class="cta">
+      <button class="btn light install" data-copy><span>$</span> go install …/sunriser@latest</button>
+      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser#readme">Read the docs</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="stage">
+    <div class="win">
+      <header><b></b><b></b><b></b><span>~/infra — sunriser</span></header>
+<div class="term"><span class="p">$ sunriser wrap kubernetes</span>
+  npx mcp-server-kubernetes · 4 tools hidden
+  log → ~/.sunriser/audit.jsonl
+
+<span class="p">$ sunriser audit list -n 5</span>
+  TIME      CLIENT        TOOL              DECISION   MS
+  11:42:51  claude-code   kubectl_get       <span class="o">allowed</span>    38
+  11:42:53  claude-code   kubectl_logs      <span class="o">allowed</span>   112
+  11:43:00  cursor/1.4    kubectl_delete    <span class="b">blocked</span>     0
+  11:43:04  cursor/1.4    kubectl_rollout   <span class="o">allowed</span>   940
+  11:43:09  claude-code   node_management   <span class="b">blocked</span>     0
+
+<span class="p">$ sunriser audit verify</span>
+  <span class="o">ok</span>  1,284 lines, chain intact
+  head 6a5ea612e0c4…</div>
+      <div class="side">
+        <div class="msg">Drain node pool b, then restart the api.</div>
+        <div class="msg agent">Called <em>node_management</em> to drain. It returned <em>blocked by policy</em>, so I stopped there. Restarting the api without a drain needs your call.</div>
+        <div class="ask">Ask your agent anything…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="setup">
+    <div class="setup-copy">
+      <span class="label">Step 1</span>
+      <h3>Name the server once.</h3>
+      <p>Keep the server you run today. Write its command and the tools to deny in one file.</p>
+    </div>
+    <div class="panel">
+      <header><span>~/.sunriser/config.json</span><button class="copy">Copy</button></header>
+<pre><code>{
+  "servers": {
+    <b>"kubernetes"</b>: {
+      "command": ["npx", "mcp-server-kubernetes"],
+      "deny": [
+        "kubectl_delete", "kubectl_generic",
+        "node_*", "uninstall_*"
+      ]
+    }
+  }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="setup">
+    <div class="setup-copy">
+      <span class="label">Step 2</span>
+      <h3>Point the agent at the name.</h3>
+      <p>One short line. Change the deny list later without touching the agent config.</p>
+    </div>
+    <div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="cc">Claude Code</button>
+        <button role="tab" aria-selected="false" data-tab="cursor">Cursor</button>
+        <button role="tab" aria-selected="false" data-tab="any">Any MCP client</button>
+      </div>
+      <div class="panel" data-panel="cc">
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code>claude mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
+      </div>
+      <div class="panel" data-panel="cursor" hidden>
+        <header><span>~/.cursor/mcp.json</span><button class="copy">Copy</button></header>
+<pre><code>{
+  "mcpServers": {
+    "kubernetes": { "command": "sunriser", "args": ["wrap", <b>"kubernetes"</b>] }
+  }
+}</code></pre>
+      </div>
+      <div class="panel" data-panel="any" hidden>
+        <header><span>Any client</span><button class="copy">Copy</button></header>
+<pre><code><s># the command the client runs</s>
+sunriser wrap <b>kubernetes</b>
+
+<s># no config file? pass it inline</s>
+sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <section id="products">
+    <h2>Guard <span class="dim">every call,</span> scope <span class="dim">every identity,</span><br>collect <span class="dim">the record,</span> share <span class="dim">what you learn,</span><br>run <span class="dim">what they build.</span></h2>
+    <div class="family">
+      <a href="#guard">
+        <span class="tag on">Available</span>
+        <h3>Guard</h3>
+        <p>Sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.</p>
+      </a>
+      <a href="#warrant">
+        <span class="tag">Soon</span>
+        <h3>Warrant</h3>
+        <p>Issues each agent a short-lived Kubernetes warrant bound to one role. It never holds your real credentials.</p>
+      </a>
+      <a href="#hub">
+        <span class="tag">Soon</span>
+        <h3>Hub</h3>
+        <p>A collector you host yourself. It joins the audit logs from every machine into one record.</p>
+      </a>
+      <a href="#hub">
+        <span class="tag">Soon</span>
+        <h3>Advisories</h3>
+        <p>Shared findings about risky MCP tools. Written as YAML, sent as pull requests.</p>
+      </a>
+      <a href="#sky">
+        <span class="tag">Soon</span>
+        <h3>Sky</h3>
+        <p>Where the apps your agents build run. Git push, a buildpack, a beam. Every deploy carries a warrant.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="guard">
+    <h2>Guard <span class="tag on">Available</span><br><span class="dim">Hide the tools you deny, refuse the calls, and remember what each agent did.</span></h2>
+    <div class="pillars">
+      <div>
+        <span class="label">01 · wrap</span>
+        <h3>Wrap</h3>
+        <p>Sits in front of any MCP server over stdio. Denied tools vanish from the list. A call to one returns “blocked by policy” instead of running.</p>
+      </div>
+      <div>
+        <span class="label">02 · audit</span>
+        <h3>Audit</h3>
+        <p>Every call lands as one JSON line: who asked, which tool, the decision, and how long it took. Filter by tool, server or time.</p>
+      </div>
+      <div>
+        <span class="label">03 · verify</span>
+        <h3>Verify</h3>
+        <p>Each line carries the hash of the line before. <code>audit verify</code> names the first line that was changed or removed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sunblock">
+      <pre aria-hidden="true" id="ascii"></pre>
+      <div class="copy">
+        <h2>One binary. Your machine.<br>Nothing phones home.</h2>
+        <p>No SaaS, no telemetry, no account. The log is a file you own.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="log">
+    <h2>One line per call<br><span class="dim">Facts only. Readers build the rest.</span></h2>
+    <div class="split">
+<div class="json">{
+  <span class="k">"ts"</span>: "2026-11-03T11:43:00Z",
+  <span class="k">"client"</span>: "cursor/1.4",
+  <span class="k">"tool"</span>: "kubectl_delete",
+  <span class="k">"decision"</span>: <span class="b">"blocked"</span>,
+  <span class="k">"ok"</span>: false,
+  <span class="k">"ms"</span>: 0,
+  <span class="k">"session"</span>: "cb7e3c9f",
+  <span class="k">"seq"</span>: 1,
+  <span class="k">"agent"</span>: 42292,
+  <span class="k">"via"</span>: "wrap",
+  <span class="k">"prev"</span>: "6a5ea612…"
+}</div>
+      <div class="fields">
+        <code>client</code><span>What the agent said in its MCP handshake.</span>
+        <code>decision</code><span>allowed or blocked, decided by your deny list.</span>
+        <code>agent</code><span>The pid that launched the wrap. It is the same for every server one agent session started.</span>
+        <code>prev</code><span>The hash of the line before. This is what makes the log a chain.</span>
+        <code>head</code><span>Printed by <code style="padding:0">verify</code>. Keep it somewhere the agent cannot reach, and compare later.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="warrant">
+    <h2>Warrant <span class="tag">Soon</span><br><span class="dim">The agent acts on a warrant, not your keys.</span></h2>
+    <div class="rows">
+      <div><code>warrant-view</code><p>Read resources in one namespace. The starting point for every agent.</p></div>
+      <div><code>warrant-deploy</code><p>Ship new versions. Nothing outside the namespace it was bound to.</p></div>
+      <div><code>warrant-operate</code><p>Day-two work such as scaling and restarts.</p></div>
+      <div><code>wrap --as shop/deploy-bot</code><p>Guard runs the server as that identity. The token is short-lived, and every call records who it ran as.</p></div>
+    </div>
+  </section>
+
+  <section id="hub">
+    <h2>Hub and advisories <span class="tag">Soon</span><br><span class="dim">One record across machines. Shared knowledge about risky tools.</span></h2>
+    <div class="pillars">
+      <div>
+        <span class="label">hub</span>
+        <h3>Self-hosted collector</h3>
+        <p>When a second machine runs agents, hub joins their logs into one record. You run it. Nothing leaves your network.</p>
+      </div>
+      <div>
+        <span class="label">advisories</span>
+        <h3>Findings as pull requests</h3>
+        <p>A public repo of YAML findings about MCP tools that are risky to allow. Anyone can add one.</p>
+      </div>
+      <div>
+        <span class="label">no</span>
+        <h3>What stays out</h3>
+        <p>No marketplace, no risk scores, no telemetry, no SaaS.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sky">
+    <h2>Sky <span class="tag">Soon</span><br><span class="dim">Agents ship apps. Sky runs them, under the same rules.</span></h2>
+    <div class="rows">
+      <div><code>sunriser sky deploy</code><p>Push a repo. A buildpack turns it into a bundle, a beam runs it. No Dockerfile needed.</p></div>
+      <div><code>sunriser sky scale web=3</code><p>Beams are the unit of compute. Add or remove them in one line.</p></div>
+      <div><code>sunriser sky logs</code><p>App output and every deploy, scale and config change in one stream. Each line says which agent did it.</p></div>
+      <div><code>enclave</code><p>A private network for apps that must not share a wire. Deploys into it need a warrant bound to it.</p></div>
+    </div>
+  </section>
+
+  <section id="agents">
+    <h2>Built for agents to read, too<br><span class="dim">Policy lives in the proxy, not in the prompt.</span></h2>
+    <p>A rule in <code>CLAUDE.md</code> can be forgotten. A tool that is not in the list cannot be called. The log is the agent's memory of what it did, and it can read that back.</p>
+    <div class="rows">
+      <div><code>sunriser mcp</code><p>An MCP server over stdio. An agent can ask what ran against a server last week before it runs anything new.</p></div>
+      <div><code>sunriser skill install</code><p>Teaches Claude Code and Cursor what is blocked before they try.</p></div>
+      <div><code>sunriser commands --json</code><p>Every command and flag, for tools that build on top.</p></div>
+      <div><code>--json</code><p>stdout holds one JSON document. Exit codes: 0 ok, 1 your mistake, 2 the machine’s.</p></div>
+    </div>
+  </section>
+
+  <div class="closing">
+    <h2>Start with the guard.<br><span class="dim">It takes one line in your agent config.</span></h2>
+    <div class="cta">
+      <button class="btn light install" data-copy><span>$</span> go install …/sunriser@latest</button>
+      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser">View on GitHub</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>sunriser.sh</span>
+    <a href="https://github.com/sunriser-sh/sunriser">GitHub</a>
+    <a href="https://github.com/sunriser-sh/sunriser#readme">Docs</a>
+    <span class="end">Open source</span>
+  </footer>
+</div>
+
+<script>
+const CMD = "go install github.com/sunriser-sh/sunriser/cmd/sunriser@latest";
+document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
+  const t = b.innerHTML;
+  try { await navigator.clipboard.writeText(CMD); b.textContent = "Copied"; } catch { b.textContent = CMD; }
+  setTimeout(() => b.innerHTML = t, 1400);
+});
+
+document.querySelectorAll(".copy").forEach(b => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(b.closest(".panel").querySelector("code").innerText); b.textContent = "Copied"; } catch { b.textContent = "Select to copy"; }
+  setTimeout(() => b.textContent = "Copy", 1400);
+});
+
+document.querySelectorAll("[data-tab]").forEach(t => t.onclick = () => {
+  document.querySelectorAll("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === t));
+  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
+});
+
+// ASCII sunrise: density falls off with distance from a sun below the bottom edge.
+const pre = document.getElementById("ascii");
+function draw() {
+  const cols = Math.ceil(pre.clientWidth / 7.2), rows = Math.ceil(pre.clientHeight / 14);
+  const cx = cols * .72, cy = rows * 1.05, chars = " .-->>00";
+  let out = "";
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const d = Math.hypot((x - cx) / 2.1, y - cy) / rows;
+      const ray = Math.sin(Math.atan2(y - cy, x - cx) * 14) * .06;
+      const v = 1.15 - d + ray;
+      out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(v * chars.length)))];
+    }
+    out += "\n";
+  }
+  pre.textContent = out;
+}
+draw();
+addEventListener("resize", draw);
+</script>
+</body>
+</html>
