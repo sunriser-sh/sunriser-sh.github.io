@@ -60,6 +60,8 @@ h2 { font-size: clamp(28px, 3.6vw, 40px); }
 /* hero */
 .hero { padding: 96px 0 48px; }
 .hero .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.soon { margin-top: 32px; color: var(--mute); font-size: 15px; }
+.soon .tag { margin-right: 12px; }
 .install { font-family: var(--mono); font-size: 13px; font-weight: 400; }
 .install span { color: var(--dim); }
 
@@ -167,7 +169,7 @@ footer .end { margin-left: auto; }
 </head>
 <body>
 
-<div class="bar">Guard is out. Warrant, hub and advisories are on the way.<a href="https://github.com/sunriser-sh/sunriser">Star on GitHub →</a></div>
+<div class="bar">Guard is in private preview. The code opens soon.</div>
 
 <div class="wrap">
   <nav>
@@ -177,20 +179,12 @@ footer .end { margin-left: auto; }
       <a href="#guard">Guard</a>
       <a href="#warrant">Warrant</a>
       <a href="#agents">For agents</a>
-      <a href="https://github.com/sunriser-sh/sunriser#readme">Docs</a>
-    </div>
-    <div class="end">
-      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser">GitHub</a>
-      <button class="btn light" data-copy>Install</button>
     </div>
   </nav>
 
   <div class="hero">
     <h1>Let your agents deploy and scale infrastructure<br><span class="dim">Keep every call guarded, scoped and on the record.</span></h1>
-    <div class="cta">
-      <button class="btn light install" data-copy><span>$</span> go install …/sunriser@latest</button>
-      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser#readme">Read the docs</a>
-    </div>
+    <p class="soon"><span class="tag on">Private preview</span>The code opens soon.</p>
   </div>
 </div>
 
@@ -282,7 +276,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
     <h2>Guard <span class="dim">every call,</span> scope <span class="dim">every identity,</span><br>collect <span class="dim">the record,</span> share <span class="dim">what you learn,</span><br>run <span class="dim">what they build.</span></h2>
     <div class="family">
       <a href="#guard">
-        <span class="tag on">Available</span>
+        <span class="tag on">Preview</span>
         <h3>Guard</h3>
         <p>Sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.</p>
       </a>
@@ -310,7 +304,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   </section>
 
   <section id="guard">
-    <h2>Guard <span class="tag on">Available</span><br><span class="dim">Hide the tools you deny, refuse the calls, and remember what each agent did.</span></h2>
+    <h2>Guard <span class="tag on">Preview</span><br><span class="dim">Hide the tools you deny, refuse the calls, and remember what each agent did.</span></h2>
     <div class="pillars">
       <div>
         <span class="label">01 · wrap</span>
@@ -419,29 +413,17 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   </section>
 
   <div class="closing">
-    <h2>Start with the guard.<br><span class="dim">It takes one line in your agent config.</span></h2>
-    <div class="cta">
-      <button class="btn light install" data-copy><span>$</span> go install …/sunriser@latest</button>
-      <a class="btn ghost" href="https://github.com/sunriser-sh/sunriser">View on GitHub</a>
-    </div>
+    <h2>The guard opens first.<br><span class="dim">It takes one line in your agent config.</span></h2>
+    <p class="soon"><span class="tag on">Private preview</span>The code opens soon.</p>
   </div>
 
   <footer>
     <span>sunriser.sh</span>
-    <a href="https://github.com/sunriser-sh/sunriser">GitHub</a>
-    <a href="https://github.com/sunriser-sh/sunriser#readme">Docs</a>
-    <span class="end">Open source</span>
+    <span class="end">Open source soon</span>
   </footer>
 </div>
 
 <script>
-const CMD = "go install github.com/sunriser-sh/sunriser/cmd/sunriser@latest";
-document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
-  const t = b.innerHTML;
-  try { await navigator.clipboard.writeText(CMD); b.textContent = "Copied"; } catch { b.textContent = CMD; }
-  setTimeout(() => b.innerHTML = t, 1400);
-});
-
 document.querySelectorAll(".copy").forEach(b => b.onclick = async () => {
   try { await navigator.clipboard.writeText(b.closest(".panel").querySelector("code").innerText); b.textContent = "Copied"; } catch { b.textContent = "Select to copy"; }
   setTimeout(() => b.textContent = "Copy", 1400);
