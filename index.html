@@ -282,7 +282,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
 
   <section id="agents">
     <h2><span data-t="agents">The agent can't skip your rules</span><br><span class="dim" data-t="agents-sub">The rules sit outside the agent, where no prompt can reach.</span></h2>
-    <p data-t="agents-text">An agent can forget a rule you wrote in a file like <code>CLAUDE.md</code>. It can't use a tool that sunriser has taken away. It can also ask sunriser what is blocked and what it did before, so it doesn't have to guess.</p>
+    <p data-t="agents-text">Make the rules external managed, not in .md files.</p>
     <div class="rows">
       <div><code>sunriser mcp</code><p data-t="agents-mcp">Lets the agent ask sunriser questions, such as what ran on a server last week.</p></div>
       <div><code>sunriser skill install</code><p data-t="agents-skill">Tells Claude Code and Cursor what is blocked, so they know before they try.</p></div>

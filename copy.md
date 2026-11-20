@@ -70,7 +70,7 @@ The agent can't skip your rules
 The rules sit outside the agent, where no prompt can reach.
 
 ## agents-text
-An agent can forget a rule you wrote in a file like `CLAUDE.md`. It can't use a tool that sunriser has taken away. It can also ask sunriser what is blocked and what it did before, so it doesn't have to guess.
+Make the rules external managed, not in .md files.
 
 ## agents-mcp
 Lets the agent ask sunriser questions, such as what ran on a server last week.
