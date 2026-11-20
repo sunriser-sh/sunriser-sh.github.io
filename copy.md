@@ -132,7 +132,7 @@ Printed by `verify`. Save it where the agent can't reach it, then compare it the
 # Warrant
 
 ## warrant-sub (fits 60)
-The agent gets a pass that works for one job and soon runs out. Your own keys stay with you.
+Agent should have their own pass ticket to do something.
 
 ## warrant-view
 Read-only access to one namespace. Every agent starts here.
