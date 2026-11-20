@@ -156,10 +156,6 @@ Sets how many copies of each process run.
 
 ## sky-logs
 Shows the app's logs. When a pod can't run, Sky records an incident on the app.
-
-## sky-isolation
-Each app gets its own namespace. A network policy lets in only the app's own pods and the gateway.
-
 # Warrant
 
 ## warrant-sub (fits 60)
