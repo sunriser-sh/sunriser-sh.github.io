@@ -84,19 +84,19 @@ Tells Claude Code and Cursor what is blocked, so they know before they try.
 The five parts of sunriser
 
 ## card-guard (fits 110)
-A proxy that sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.
+Per-tool, per-action control for MCP servers. Denied actions leave the tool list, and every call is logged.
 
 ## card-sky (fits 110)
-Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.
+A sanctioned platform for the apps your agents build, in place of shadow IT. Deploys run under a warrant.
 
 ## card-warrant (fits 110)
-Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.
+A single-purpose, least-privilege identity per agent. It limits the blast radius and holds none of your keys.
 
 ## card-hub (fits 110)
-A collector you host yourself. It pulls the audit logs from all your machines into one record.
+A collector you host. It gathers agent telemetry from all your machines into one auditable record.
 
 ## card-advisories (fits 110)
-A list of what to upgrade and why: exploited CVEs, end-of-life versions and risky MCP tools in what you run.
+What to upgrade before an exploit arrives: exploited CVEs, end-of-life versions and risky MCP tools you run.
 
 # Guard
 
