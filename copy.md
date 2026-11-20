@@ -25,7 +25,7 @@ sunriser sits between your coding agent and its MCP servers. It hides the tools 
 A Continuous-Security Approach for AI SDLC
 
 ## hero-sub (fits 60)
-Sunriser helps securing systems continuously as models, data, dependencies, and deployment environments evolve
+Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve
 
 ## soon
 The source will be public soon.
@@ -84,7 +84,7 @@ Runs the apps your agents build, straight from a git push. Each deploy runs unde
 # Guard
 
 ## guard-sub (fits 60)
-It stops what you don't allow and writes down every action.
+It protects you from unwanted actions.
 
 ## guard-wrap
 Guard sits in front of any MCP server that speaks stdio. It removes the tools you deny from the tool list, so the agent doesn't see them. If the agent calls one anyway, it gets "blocked by policy" back and nothing runs.
@@ -112,7 +112,7 @@ You don't need an account. The log is a file on your disk.
 Every action is audited
 
 ## log-sub (fits 60)
-Log recorded who did what and when and searchable in the log chain
+A searchable log chain records who did what and when.
 
 ## field-client
 The name the agent gave in its MCP handshake.
@@ -195,7 +195,7 @@ Agents can read it too
 The proxy enforces the rules, whatever the prompt says.
 
 ## agents-text
-An agent can forget a rule in `CLAUDE.md`, but it can't call a tool that isn't in its list. The log is also the agent's memory: it can read back what it did.
+An agent can forget a rule in `CLAUDE.md`, but it can't call a tool that isn't in its list. It can also read the log to check what it did earlier.
 
 ## agents-mcp
 An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.

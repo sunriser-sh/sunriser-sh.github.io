@@ -183,7 +183,7 @@ footer .end { margin-left: auto; }
   </nav>
 
   <div class="hero">
-    <h1><span data-t="hero">A Continuous-Security Approach for AI SDLC</span><br><span class="dim" data-t="hero-sub">Sunriser helps securing systems continuously as models, data, dependencies, and deployment environments evolve</span></h1>
+    <h1><span data-t="hero">A Continuous-Security Approach for AI SDLC</span><br><span class="dim" data-t="hero-sub">Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve</span></h1>
     <p class="soon"><span class="tag on">Private preview</span><span data-t="soon">The source will be public soon.</span></p>
   </div>
 </div>
@@ -314,7 +314,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   </section>
 
   <section id="guard">
-    <h2>Guard <span class="tag on">Preview</span><br><span class="dim" data-t="guard-sub">It stops what you don't allow and writes down every action.</span></h2>
+    <h2>Guard <span class="tag on">Preview</span><br><span class="dim" data-t="guard-sub">It protects you from unwanted actions.</span></h2>
     <div class="pillars">
       <div>
         <span class="label">01 · wrap</span>
@@ -345,7 +345,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   </section>
 
   <section id="log">
-    <h2><span data-t="log">Every action is audited</span><br><span class="dim" data-t="log-sub">Log recorded who did what and when and searchable in the log chain</span></h2>
+    <h2><span data-t="log">Every action is audited</span><br><span class="dim" data-t="log-sub">A searchable log chain records who did what and when.</span></h2>
     <div class="split">
 <div class="json">{
   <span class="k">"ts"</span>: "2026-11-03T11:43:00Z",
@@ -413,7 +413,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
 
   <section id="agents">
     <h2><span data-t="agents">Agents can read it too</span><br><span class="dim" data-t="agents-sub">The proxy enforces the rules, whatever the prompt says.</span></h2>
-    <p data-t="agents-text">An agent can forget a rule in <code>CLAUDE.md</code>, but it can't call a tool that isn't in its list. The log is also the agent's memory: it can read back what it did.</p>
+    <p data-t="agents-text">An agent can forget a rule in <code>CLAUDE.md</code>, but it can't call a tool that isn't in its list. It can also read the log to check what it did earlier.</p>
     <div class="rows">
       <div><code>sunriser mcp</code><p data-t="agents-mcp">An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.</p></div>
       <div><code>sunriser skill install</code><p data-t="agents-skill">Tells Claude Code and Cursor what's blocked, so they know before they try.</p></div>
