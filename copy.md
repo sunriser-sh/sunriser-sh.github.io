@@ -25,7 +25,7 @@ sunriser sits between your coding agent and its MCP servers. It hides the tools 
 Guard is in private preview. The source will be public soon.
 
 ## hero (fits 50)
-An agent with kubectl can delete anything
+A Continuous-Security Approach for AI SDLC
 
 ## hero-sub (fits 60)
 sunriser hides the tools you deny and logs every call.
