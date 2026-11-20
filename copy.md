@@ -61,6 +61,23 @@ the command the client runs
 ## any-2
 no config file? pass it inline
 
+# Why the agent can't skip the rules
+
+## agents
+The agent can't skip your rules
+
+## agents-sub (fits 60)
+The rules sit outside the agent, where no prompt can reach.
+
+## agents-text
+An agent can forget a rule you wrote in a file like `CLAUDE.md`. It can't use a tool that sunriser has taken away. It can also ask sunriser what is blocked and what it did before, so it doesn't have to guess.
+
+## agents-mcp
+Lets the agent ask sunriser questions, such as what ran on a server last week.
+
+## agents-skill
+Tells Claude Code and Cursor what is blocked, so they know before they try.
+
 # The five product cards
 
 ## products
@@ -72,14 +89,14 @@ A proxy that sits in front of any MCP server. It hides the tools you deny and lo
 ## card-warrant (fits 110)
 Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.
 
+## card-sky (fits 110)
+Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.
+
 ## card-hub (fits 110)
 A collector you host yourself. It pulls the audit logs from all your machines into one record.
 
 ## card-advisories (fits 110)
 A list of what to upgrade and why: exploited CVEs, end-of-life versions and risky MCP tools in what you run.
-
-## card-sky (fits 110)
-Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.
 
 # Guard
 
@@ -146,6 +163,23 @@ For day-two work such as scaling and restarts.
 ## warrant-as
 Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.
 
+# Sky
+
+## sky-sub (fits 60)
+Simplified way to ship, scale, and monitor your apps on any infrastructure securely.
+
+## sky-deploy
+Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.
+
+## sky-scale
+A beam is the unit of compute. You add or remove beams with one command.
+
+## sky-logs
+Shows app output together with every deploy, scale and config change. Each change says which agent made it.
+
+## sky-enclave
+A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.
+
 # Hub and advisories
 
 ## hub-sub (fits 60)
@@ -168,23 +202,6 @@ What stays out
 
 ## out
 There won't be a marketplace or a hosted service. sunriser doesn't score risk and doesn't collect telemetry.
-
-# Sky
-
-## sky-sub (fits 60)
-Simplified way to ship, scale, and monitor your apps on any infrastructure securely.
-
-## sky-deploy
-Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.
-
-## sky-scale
-A beam is the unit of compute. You add or remove beams with one command.
-
-## sky-logs
-Shows app output together with every deploy, scale and config change. Each change says which agent made it.
-
-## sky-enclave
-A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.
 
 # Bottom of the page
 
