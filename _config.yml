@@ -1,2 +1,0 @@
-# Keep the text source and the build script off the published site.
-exclude: [copy.md, build.py]

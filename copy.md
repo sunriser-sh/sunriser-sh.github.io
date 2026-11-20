@@ -3,8 +3,9 @@
 Every text on the page has a `##` line with its name. The text sits under it.
 Change the text. Leave the `##` lines as they are.
 
-Then run `python3 build.py`. It writes the text into `index.html`.
-Commit `copy.md` and `index.html` together.
+Then commit and push. GitHub builds the page from this file and publishes it.
+To look before you push, run `python3 build.py` and open `index.html`.
+The `index.html` in the repo may show older text. The build fills in the new text.
 
 - `` `word` `` shows as code. `*word*` shows as highlighted. No other markdown works.
 - A line that starts with one `#` is only a divider, like this title.
