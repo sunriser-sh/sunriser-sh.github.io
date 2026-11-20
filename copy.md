@@ -109,10 +109,10 @@ You don't need an account. The log is a file on your disk.
 # The log line
 
 ## log
-Every action leaves one line in the log
+Every action is audited
 
 ## log-sub (fits 60)
-Each line says who did what and when. You can search it like any text file.
+Log recorded who did what and when and searchable in the log chain
 
 ## field-client
 The name the agent gave in its MCP handshake.
