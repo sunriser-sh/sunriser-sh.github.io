@@ -76,7 +76,7 @@ Make the rules external managed, not in .md files.
 Lets the agent ask sunriser questions, such as what ran on a server last week.
 
 ## agents-skill
-Tells Claude Code and Cursor what is blocked, so they know before they try.
+Tells agents what action they cannot do, so they know in advance.
 
 # The product cards
 
