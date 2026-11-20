@@ -186,36 +186,7 @@ Shows app output together with every deploy, scale and config change. Each chang
 ## sky-enclave
 A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.
 
-# For agents
-
-## agents
-Agents can read it too
-
-## agents-sub (fits 60)
-The proxy enforces the rules, whatever the prompt says.
-
-## agents-text
-An agent can forget a rule in `CLAUDE.md`, but it can't call a tool that isn't in its list. It can also read the log to check what it did earlier.
-
-## agents-mcp
-An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.
-
-## agents-skill
-Tells Claude Code and Cursor what's blocked, so they know before they try.
-
-## agents-commands
-Lists every command and flag, for tools that build on sunriser.
-
-## agents-json
-With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine's.
-
 # Bottom of the page
-
-## closing (fits 45)
-Guard will be the first part to go public.
-
-## closing-sub (fits 60)
-Setting it up takes one line in your agent config.
 
 ## footer
 Open source soon

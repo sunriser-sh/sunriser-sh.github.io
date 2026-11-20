@@ -158,10 +158,8 @@ h2 .tag { vertical-align: middle; margin-left: 12px; }
 .rows p { color: var(--mute); }
 @media (max-width: 720px) { .rows div { grid-template-columns: 1fr; gap: 6px; } }
 
-/* closing */
-.closing { padding: 160px 0 120px; }
-.closing .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-footer { border-top: 1px solid var(--line); padding: 28px 0 48px; font-size: 13px; color: var(--dim); display: flex; gap: 24px; flex-wrap: wrap; }
+/* footer */
+footer { margin-top: 120px; border-top: 1px solid var(--line); padding: 28px 0 48px; font-size: 13px; color: var(--dim); display: flex; gap: 24px; flex-wrap: wrap; }
 footer a:hover { color: var(--fg); }
 footer .end { margin-left: auto; }
 </style>
@@ -178,7 +176,6 @@ footer .end { margin-left: auto; }
       <a href="#hub">Hub</a>
       <a href="#hub">Advisories</a>
       <a href="#sky">Sky</a>
-      <a href="#agents">For agents</a>
     </div>
   </nav>
 
@@ -410,22 +407,6 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <div><code>enclave</code><p data-t="sky-enclave">A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.</p></div>
     </div>
   </section>
-
-  <section id="agents">
-    <h2><span data-t="agents">Agents can read it too</span><br><span class="dim" data-t="agents-sub">The proxy enforces the rules, whatever the prompt says.</span></h2>
-    <p data-t="agents-text">An agent can forget a rule in <code>CLAUDE.md</code>, but it can't call a tool that isn't in its list. It can also read the log to check what it did earlier.</p>
-    <div class="rows">
-      <div><code>sunriser mcp</code><p data-t="agents-mcp">An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.</p></div>
-      <div><code>sunriser skill install</code><p data-t="agents-skill">Tells Claude Code and Cursor what's blocked, so they know before they try.</p></div>
-      <div><code>sunriser commands --json</code><p data-t="agents-commands">Lists every command and flag, for tools that build on sunriser.</p></div>
-      <div><code>--json</code><p data-t="agents-json">With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine's.</p></div>
-    </div>
-  </section>
-
-  <div class="closing">
-    <h2><span data-t="closing">Guard will be the first part to go public.</span><br><span class="dim" data-t="closing-sub">Setting it up takes one line in your agent config.</span></h2>
-    <p class="soon"><span class="tag on">Private preview</span><span data-t="soon">The source will be public soon.</span></p>
-  </div>
 
   <footer>
     <span>sunriser.sh</span>
