@@ -84,7 +84,7 @@ Runs the apps your agents build, straight from a git push. Each deploy runs unde
 # Guard
 
 ## guard-sub (fits 60)
-Guard stops the agent from doing what you don't allow, and writes down everything it does.
+It stops what you don't allow and writes down every action.
 
 ## guard-wrap
 Guard sits in front of any MCP server that speaks stdio. It removes the tools you deny from the tool list, so the agent doesn't see them. If the agent calls one anyway, it gets "blocked by policy" back and nothing runs.
