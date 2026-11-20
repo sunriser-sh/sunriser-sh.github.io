@@ -21,14 +21,11 @@ sunriser sits between your coding agent and its MCP servers. It hides the tools 
 
 # Top of the page
 
-## banner
-Guard is in private preview. The source will be public soon.
-
 ## hero (fits 50)
 A Continuous-Security Approach for AI SDLC
 
 ## hero-sub (fits 60)
-sunriser hides the tools you deny and logs every call.
+Sunriser helps securing systems continuously as models, data, dependencies, and deployment environments evolve
 
 ## soon
 The source will be public soon.
