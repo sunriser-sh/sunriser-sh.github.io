@@ -87,7 +87,7 @@ The five parts of sunriser
 Per-tool, per-action control for MCP servers. Denied actions leave the tool list, and every call is logged.
 
 ## card-sky (fits 110)
-A sanctioned platform for the apps your agents build, in place of shadow IT. Deploys run under a warrant.
+A platform as a service for your apps. Build, Deploy, and Maintain with it.
 
 ## card-warrant (fits 110)
 A single-purpose, least-privilege identity per agent. It limits the blast radius and holds none of your keys.
