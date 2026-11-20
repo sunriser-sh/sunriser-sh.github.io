@@ -17,7 +17,7 @@ The `index.html` in the repo may show older text. The build fills in the new tex
 sunriser: a guard for agents that run your infrastructure
 
 ## description
-sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and keeps a log of every call that you can check later.
+sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.
 
 # Top of the page
 
@@ -50,13 +50,13 @@ Ask your agent anything…
 Give your MCP server a name.
 
 ## step1
-You keep the server you already run. Put its command in this file, along with the tools the agent should not have.
+Keep the MCP server you already run. Put its command in this file, with the tools the agent shouldn't get.
 
 ## step2-title
 Point your agent at that name.
 
 ## step2
-This is the only change to the agent’s config. You can edit the deny list later and leave the agent alone.
+That's the only change to the agent's config. You can edit the deny list later without touching it again.
 
 ## any-1
 the command the client runs
@@ -79,27 +79,27 @@ A proxy that sits in front of any MCP server. It hides the tools you deny and lo
 Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.
 
 ## card-hub (fits 110)
-A collector that you host yourself. It gathers the audit logs from all your machines into one record.
+A collector you host yourself. It pulls the audit logs from all your machines into one record.
 
 ## card-advisories (fits 110)
 A list of what to upgrade and why: exploited CVEs, end-of-life versions and risky MCP tools in what you run.
 
 ## card-sky (fits 110)
-Runs the apps your agents build, straight from a git push. Every deploy is made under a warrant.
+Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.
 
 # Guard
 
 ## guard-sub (fits 60)
-The agent cannot see denied tools, and every call is logged.
+The agent can't see denied tools, and every call is logged.
 
 ## guard-wrap
-Guard sits in front of any MCP server that speaks stdio. The tools you deny are taken out of the tool list, so the agent does not see them. If it calls one anyway, it gets “blocked by policy” back and nothing runs.
+Guard sits in front of any MCP server that speaks stdio. It removes the tools you deny from the tool list, so the agent doesn't see them. If the agent calls one anyway, it gets "blocked by policy" back and nothing runs.
 
 ## guard-audit
-Each call is written as one line of JSON. The line records who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.
+Guard writes each call as one line of JSON: who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.
 
 ## guard-verify
-Every line includes the hash of the line before it. If a line is changed or removed, `audit verify` points to the first one.
+Every line includes the hash of the line before it. If someone changes or removes a line, `audit verify` points to the first one.
 
 # The orange block
 
@@ -110,7 +110,7 @@ One binary on your machine.
 Nothing phones home.
 
 ## sun-text (fits 60)
-No account and no telemetry. The log is a file on your disk.
+You don't need an account. The log is a file on your disk.
 
 # The log line
 
@@ -118,7 +118,7 @@ No account and no telemetry. The log is a file on your disk.
 Every call is one line of JSON
 
 ## log-sub (fits 60)
-It records what happened. Other tools can build on that.
+It records what happened, in lines jq and grep can read.
 
 ## field-client
 The name the agent gave in its MCP handshake.
@@ -127,13 +127,13 @@ The name the agent gave in its MCP handshake.
 Either allowed or blocked, according to your deny list.
 
 ## field-agent
-The pid of the process that started the wrap. Every server started by one agent session has the same one.
+The pid of the process that started the wrap. All servers from one agent session share it.
 
 ## field-prev
-The hash of the previous line. That link is what makes the log a chain.
+The hash of the previous line, which chains the log together.
 
 ## field-head
-Printed by `verify`. Save it where the agent cannot reach it, then compare it the next time you verify.
+Printed by `verify`. Save it where the agent can't reach it, then compare it the next time you verify.
 
 # Warrant
 
@@ -144,7 +144,7 @@ The agent works with a warrant instead of your keys.
 Read-only access to one namespace. Every agent starts here.
 
 ## warrant-deploy
-Can roll out new versions, but only in the namespace it is bound to.
+Can roll out new versions, but only in the namespace it's bound to.
 
 ## warrant-operate
 For day-two work such as scaling and restarts.
@@ -167,13 +167,13 @@ Once agents run on more than one machine, Hub collects their logs into one recor
 What to upgrade and why
 
 ## advisories
-A list checked against what you run. It covers CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.
+Advisories checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.
 
 ## out-title
 What stays out
 
 ## out
-There will be no marketplace and no hosted service. sunriser does not score risk and does not collect telemetry.
+There won't be a marketplace or a hosted service. sunriser doesn't score risk and doesn't collect telemetry.
 
 # Sky
 
@@ -181,7 +181,7 @@ There will be no marketplace and no hosted service. sunriser does not score risk
 Sky runs the apps your agents ship, under the same rules.
 
 ## sky-deploy
-Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You do not need a Dockerfile.
+Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.
 
 ## sky-scale
 A beam is the unit of compute. You add or remove beams with one command.
@@ -201,19 +201,19 @@ Agents can read it too
 The proxy enforces the rules, whatever the prompt says.
 
 ## agents-text
-An agent can forget a rule written in `CLAUDE.md`. It cannot call a tool that is missing from its list. The log also serves as the agent’s memory, because the agent can read back what it did.
+An agent can forget a rule in `CLAUDE.md`, but it can't call a tool that isn't in its list. The log is also the agent's memory: it can read back what it did.
 
 ## agents-mcp
 An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.
 
 ## agents-skill
-Tells Claude Code and Cursor what is blocked, so they know before they try.
+Tells Claude Code and Cursor what's blocked, so they know before they try.
 
 ## agents-commands
 Lists every command and flag, for tools that build on sunriser.
 
 ## agents-json
-With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine’s.
+With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine's.
 
 # Bottom of the page
 

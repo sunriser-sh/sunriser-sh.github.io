@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-t="title">sunriser: a guard for agents that run your infrastructure</title>
-<meta name="description" content="sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and keeps a log of every call that you can check later.">
+<meta name="description" content="sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -223,7 +223,7 @@ footer .end { margin-left: auto; }
     <div class="setup-copy">
       <span class="label">Step 1</span>
       <h3 data-t="step1-title">Give your MCP server a name.</h3>
-      <p data-t="step1">You keep the server you already run. Put its command in this file, along with the tools the agent should not have.</p>
+      <p data-t="step1">Keep the MCP server you already run. Put its command in this file, with the tools the agent shouldn't get.</p>
     </div>
     <div class="panel">
       <header><span>~/.sunriser/config.json</span><button class="copy">Copy</button></header>
@@ -245,7 +245,7 @@ footer .end { margin-left: auto; }
     <div class="setup-copy">
       <span class="label">Step 2</span>
       <h3 data-t="step2-title">Point your agent at that name.</h3>
-      <p data-t="step2">This is the only change to the agent’s config. You can edit the deny list later and leave the agent alone.</p>
+      <p data-t="step2">That's the only change to the agent's config. You can edit the deny list later without touching it again.</p>
     </div>
     <div>
       <div class="tabs" role="tablist">
@@ -302,7 +302,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <a href="#hub">
         <span class="tag">Soon</span>
         <h3>Hub</h3>
-        <p data-t="card-hub">A collector that you host yourself. It gathers the audit logs from all your machines into one record.</p>
+        <p data-t="card-hub">A collector you host yourself. It pulls the audit logs from all your machines into one record.</p>
       </a>
       <a href="#hub">
         <span class="tag">Soon</span>
@@ -312,28 +312,28 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <a href="#sky">
         <span class="tag">Soon</span>
         <h3>Sky</h3>
-        <p data-t="card-sky">Runs the apps your agents build, straight from a git push. Every deploy is made under a warrant.</p>
+        <p data-t="card-sky">Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.</p>
       </a>
     </div>
   </section>
 
   <section id="guard">
-    <h2>Guard <span class="tag on">Preview</span><br><span class="dim" data-t="guard-sub">The agent cannot see denied tools, and every call is logged.</span></h2>
+    <h2>Guard <span class="tag on">Preview</span><br><span class="dim" data-t="guard-sub">The agent can't see denied tools, and every call is logged.</span></h2>
     <div class="pillars">
       <div>
         <span class="label">01 · wrap</span>
         <h3>Wrap</h3>
-        <p data-t="guard-wrap">Guard sits in front of any MCP server that speaks stdio. The tools you deny are taken out of the tool list, so the agent does not see them. If it calls one anyway, it gets “blocked by policy” back and nothing runs.</p>
+        <p data-t="guard-wrap">Guard sits in front of any MCP server that speaks stdio. It removes the tools you deny from the tool list, so the agent doesn't see them. If the agent calls one anyway, it gets "blocked by policy" back and nothing runs.</p>
       </div>
       <div>
         <span class="label">02 · audit</span>
         <h3>Audit</h3>
-        <p data-t="guard-audit">Each call is written as one line of JSON. The line records who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.</p>
+        <p data-t="guard-audit">Guard writes each call as one line of JSON: who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.</p>
       </div>
       <div>
         <span class="label">03 · verify</span>
         <h3>Verify</h3>
-        <p data-t="guard-verify">Every line includes the hash of the line before it. If a line is changed or removed, <code>audit verify</code> points to the first one.</p>
+        <p data-t="guard-verify">Every line includes the hash of the line before it. If someone changes or removes a line, <code>audit verify</code> points to the first one.</p>
       </div>
     </div>
   </section>
@@ -343,13 +343,13 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <pre aria-hidden="true" id="ascii"></pre>
       <div class="copy">
         <h2><span data-t="sun-1">One binary on your machine.</span><br><span data-t="sun-2">Nothing phones home.</span></h2>
-        <p data-t="sun-text">No account and no telemetry. The log is a file on your disk.</p>
+        <p data-t="sun-text">You don't need an account. The log is a file on your disk.</p>
       </div>
     </div>
   </section>
 
   <section id="log">
-    <h2><span data-t="log">Every call is one line of JSON</span><br><span class="dim" data-t="log-sub">It records what happened. Other tools can build on that.</span></h2>
+    <h2><span data-t="log">Every call is one line of JSON</span><br><span class="dim" data-t="log-sub">It records what happened, in lines jq and grep can read.</span></h2>
     <div class="split">
 <div class="json">{
   <span class="k">"ts"</span>: "2026-11-03T11:43:00Z",
@@ -367,9 +367,9 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <div class="fields">
         <code>client</code><span data-t="field-client">The name the agent gave in its MCP handshake.</span>
         <code>decision</code><span data-t="field-decision">Either allowed or blocked, according to your deny list.</span>
-        <code>agent</code><span data-t="field-agent">The pid of the process that started the wrap. Every server started by one agent session has the same one.</span>
-        <code>prev</code><span data-t="field-prev">The hash of the previous line. That link is what makes the log a chain.</span>
-        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Save it where the agent cannot reach it, then compare it the next time you verify.</span>
+        <code>agent</code><span data-t="field-agent">The pid of the process that started the wrap. All servers from one agent session share it.</span>
+        <code>prev</code><span data-t="field-prev">The hash of the previous line, which chains the log together.</span>
+        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Save it where the agent can't reach it, then compare it the next time you verify.</span>
       </div>
     </div>
   </section>
@@ -378,7 +378,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
     <h2>Warrant <span class="tag">Soon</span><br><span class="dim" data-t="warrant-sub">The agent works with a warrant instead of your keys.</span></h2>
     <div class="rows">
       <div><code>warrant-view</code><p data-t="warrant-view">Read-only access to one namespace. Every agent starts here.</p></div>
-      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Can roll out new versions, but only in the namespace it is bound to.</p></div>
+      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Can roll out new versions, but only in the namespace it's bound to.</p></div>
       <div><code>warrant-operate</code><p data-t="warrant-operate">For day-two work such as scaling and restarts.</p></div>
       <div><code>wrap --as shop/deploy-bot</code><p data-t="warrant-as">Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.</p></div>
     </div>
@@ -395,12 +395,12 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <div>
         <span class="label">advisories</span>
         <h3 data-t="advisories-title">What to upgrade and why</h3>
-        <p data-t="advisories">A list checked against what you run. It covers CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.</p>
+        <p data-t="advisories">Advisories checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.</p>
       </div>
       <div>
         <span class="label">no</span>
         <h3 data-t="out-title">What stays out</h3>
-        <p data-t="out">There will be no marketplace and no hosted service. sunriser does not score risk and does not collect telemetry.</p>
+        <p data-t="out">There won't be a marketplace or a hosted service. sunriser doesn't score risk and doesn't collect telemetry.</p>
       </div>
     </div>
   </section>
@@ -408,7 +408,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   <section id="sky">
     <h2>Sky <span class="tag">Soon</span><br><span class="dim" data-t="sky-sub">Sky runs the apps your agents ship, under the same rules.</span></h2>
     <div class="rows">
-      <div><code>sunriser sky deploy</code><p data-t="sky-deploy">Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You do not need a Dockerfile.</p></div>
+      <div><code>sunriser sky deploy</code><p data-t="sky-deploy">Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.</p></div>
       <div><code>sunriser sky scale web=3</code><p data-t="sky-scale">A beam is the unit of compute. You add or remove beams with one command.</p></div>
       <div><code>sunriser sky logs</code><p data-t="sky-logs">Shows app output together with every deploy, scale and config change. Each change says which agent made it.</p></div>
       <div><code>enclave</code><p data-t="sky-enclave">A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.</p></div>
@@ -417,12 +417,12 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
 
   <section id="agents">
     <h2><span data-t="agents">Agents can read it too</span><br><span class="dim" data-t="agents-sub">The proxy enforces the rules, whatever the prompt says.</span></h2>
-    <p data-t="agents-text">An agent can forget a rule written in <code>CLAUDE.md</code>. It cannot call a tool that is missing from its list. The log also serves as the agent’s memory, because the agent can read back what it did.</p>
+    <p data-t="agents-text">An agent can forget a rule in <code>CLAUDE.md</code>, but it can't call a tool that isn't in its list. The log is also the agent's memory: it can read back what it did.</p>
     <div class="rows">
       <div><code>sunriser mcp</code><p data-t="agents-mcp">An MCP server over stdio. Before an agent runs anything new, it can ask what ran against a server last week.</p></div>
-      <div><code>sunriser skill install</code><p data-t="agents-skill">Tells Claude Code and Cursor what is blocked, so they know before they try.</p></div>
+      <div><code>sunriser skill install</code><p data-t="agents-skill">Tells Claude Code and Cursor what's blocked, so they know before they try.</p></div>
       <div><code>sunriser commands --json</code><p data-t="agents-commands">Lists every command and flag, for tools that build on sunriser.</p></div>
-      <div><code>--json</code><p data-t="agents-json">With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine’s.</p></div>
+      <div><code>--json</code><p data-t="agents-json">With this flag, stdout is one JSON document. Exit code 0 is ok, 1 is your mistake and 2 is the machine's.</p></div>
     </div>
   </section>
 
