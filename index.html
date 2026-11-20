@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-t="title">sunriser: a guard for agents that run your infrastructure</title>
+<title data-t="title">Sunriser: Secure your ADLC</title>
 <meta name="description" content="sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,10 +137,16 @@ h2 .tag { vertical-align: middle; margin-left: 12px; }
 /* ascii sunrise block */
 .sunblock { position: relative; background: var(--sun); color: #fff; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; }
 .sunblock pre { position: absolute; inset: 0; font: 12px/14px var(--mono); color: rgba(255,255,255,.78); white-space: pre; overflow: hidden; user-select: none; }
-.sunblock .copy { position: relative; padding: 40px; max-width: 680px; }
+/* The art fades out on the left, where the words sit. */
+.sunblock pre { -webkit-mask-image: linear-gradient(90deg, transparent 50%, #000 78%); mask-image: linear-gradient(90deg, transparent 50%, #000 78%); }
+.sunblock .words { position: relative; padding: 40px; max-width: 780px; }
 .sunblock h2 { font-weight: 500; letter-spacing: -.035em; }
 .sunblock p { margin-top: 12px; font-weight: 500; font-size: 15px; }
-@media (max-width: 720px) { .sunblock .copy { padding: 24px 16px; } }
+@media (max-width: 720px) {
+  .sunblock .words { padding: 24px 16px; }
+  /* On a phone the words fill the width, so the art keeps to the top. */
+  .sunblock pre { -webkit-mask-image: linear-gradient(#000 30%, transparent 62%); mask-image: linear-gradient(#000 30%, transparent 62%); }
+}
 
 /* record */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
@@ -344,8 +350,8 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   <section>
     <div class="sunblock">
       <pre aria-hidden="true" id="ascii"></pre>
-      <div class="copy">
-        <h2><span data-t="sun-1">One binary on your machine.</span><br><span data-t="sun-2">Nothing phones home.</span></h2>
+      <div class="words">
+        <h2><span data-t="sun-1">One binary that keeps your</span><br><span data-t="sun-2">AI SDLC secure as models evolve</span></h2>
         <p data-t="sun-text">You don't need an account. The log is a file on your disk.</p>
       </div>
     </div>

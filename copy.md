@@ -14,7 +14,7 @@ The `index.html` in the repo may show older text. The build fills in the new tex
 # Browser tab and search result
 
 ## title
-sunriser: a guard for agents that run your infrastructure
+Sunriser: Secure your ADLC
 
 ## description
 sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.
@@ -114,11 +114,11 @@ Every line includes the hash of the line before it. If someone changes or remove
 
 # The orange block
 
-## sun-1 (fits 27)
-One binary on your machine.
+## sun-1 (fits 31)
+One binary that keeps your
 
-## sun-2 (fits 27)
-Nothing phones home.
+## sun-2 (fits 31)
+AI SDLC secure as models evolve
 
 ## sun-text (fits 60)
 You don't need an account. The log is a file on your disk.
