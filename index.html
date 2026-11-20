@@ -141,7 +141,7 @@ h2 .tag { vertical-align: middle; margin-left: 12px; }
 .sunblock pre { -webkit-mask-image: linear-gradient(90deg, transparent 50%, #000 78%); mask-image: linear-gradient(90deg, transparent 50%, #000 78%); }
 .sunblock .words { position: relative; padding: 40px; max-width: 780px; }
 .sunblock h2 { font-weight: 500; letter-spacing: -.035em; }
-.sunblock p { margin-top: 12px; font-weight: 500; font-size: 15px; }
+.sunblock p { margin-top: 12px; font-weight: 500; font-size: 15px; max-width: 540px; }
 @media (max-width: 720px) {
   .sunblock .words { padding: 24px 16px; }
   /* On a phone the words fill the width, so the art keeps to the top. */
@@ -346,7 +346,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <pre aria-hidden="true" id="ascii"></pre>
       <div class="words">
         <h2><span data-t="sun-1">One binary that keeps your</span><br><span data-t="sun-2">AI SDLC secure as models evolve</span></h2>
-        <p data-t="sun-text">You don't need an account. The log is a file on your disk.</p>
+        <p data-t="sun-text">You don't need an account. The log is a tamper-evident file on your disk: each line carries the hash of the one before.</p>
       </div>
     </div>
   </section>

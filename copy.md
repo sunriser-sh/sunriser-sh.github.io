@@ -117,8 +117,8 @@ One binary that keeps your
 ## sun-2 (fits 31)
 AI SDLC secure as models evolve
 
-## sun-text (fits 60)
-You don't need an account. The log is a file on your disk.
+## sun-text
+You don't need an account. The log is a tamper-evident file on your disk: each line carries the hash of the one before.
 
 # The log line
 
