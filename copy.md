@@ -78,10 +78,10 @@ Lets the agent ask sunriser questions, such as what ran on a server last week.
 ## agents-skill
 Tells Claude Code and Cursor what is blocked, so they know before they try.
 
-# The five product cards
+# The product cards
 
 ## products
-The five parts of sunriser
+The four parts of sunriser
 
 ## card-guard (fits 110)
 Per-tool, per-action control for MCP servers. Denied actions leave the tool list, and every call is logged.
@@ -93,10 +93,7 @@ A platform as a service for your apps. Build, Deploy, and Maintain with it.
 A single-purpose, least-privilege identity per agent. It limits the blast radius and holds none of your keys.
 
 ## card-hub (fits 110)
-A collector you host. It gathers agent telemetry from all your machines into one auditable record.
-
-## card-advisories (fits 110)
-What to upgrade before an exploit arrives: exploited CVEs, end-of-life versions and risky MCP tools you run.
+A collector you host. It gathers agent telemetry from all your machines and tells you what to upgrade and why.
 
 # Guard
 
@@ -180,7 +177,7 @@ For day-two work such as scaling and restarts.
 ## warrant-as
 Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.
 
-# Hub and advisories
+# Hub
 
 ## hub-sub (fits 60)
 Your help to upgrade your systems.
@@ -195,7 +192,7 @@ Once agents run on more than one machine, Hub collects their logs into one recor
 What to upgrade and why
 
 ## advisories
-Advisories checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.
+Hub checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.
 
 ## out-title
 What stays out
