@@ -172,7 +172,7 @@ There won't be a marketplace or a hosted service. sunriser doesn't score risk an
 # Sky
 
 ## sky-sub (fits 60)
-Sky runs the apps your agents ship, under the same rules.
+Simplified way to ship, scale, and monitor your apps on any infrastructure securely.
 
 ## sky-deploy
 Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.
