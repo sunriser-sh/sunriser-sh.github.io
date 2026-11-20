@@ -146,19 +146,19 @@ Printed by `verify`. Save it where the agent can't reach it, then compare it the
 # Sky
 
 ## sky-sub (fits 60)
-Simplified way to ship, scale, and monitor your apps on any infrastructure securely.
+Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
 
 ## sky-deploy
-Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.
+Builds your app with a buildpack, pushes the image and runs it on your Kubernetes cluster. You don't need a Dockerfile or YAML.
 
 ## sky-scale
-A beam is the unit of compute. You add or remove beams with one command.
+Sets how many copies of each process run.
 
 ## sky-logs
-Shows app output together with every deploy, scale and config change. Each change says which agent made it.
+Shows the app's logs. When a pod can't run, Sky records an incident on the app.
 
-## sky-enclave
-A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.
+## sky-isolation
+Each app gets its own namespace. A network policy lets in only the app's own pods and the gateway.
 
 # Warrant
 

@@ -378,12 +378,12 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
   </section>
 
   <section id="sky">
-    <h2>Sky <span class="tag">Soon</span><br><span class="dim" data-t="sky-sub">Simplified way to ship, scale, and monitor your apps on any infrastructure securely.</span></h2>
+    <h2>Sky <span class="tag">Soon</span><br><span class="dim" data-t="sky-sub">Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.</span></h2>
     <div class="rows">
-      <div><code>sunriser sky deploy</code><p data-t="sky-deploy">Push a repo and a buildpack turns it into a bundle, which then runs on a beam. You don't need a Dockerfile.</p></div>
-      <div><code>sunriser sky scale web=3</code><p data-t="sky-scale">A beam is the unit of compute. You add or remove beams with one command.</p></div>
-      <div><code>sunriser sky logs</code><p data-t="sky-logs">Shows app output together with every deploy, scale and config change. Each change says which agent made it.</p></div>
-      <div><code>enclave</code><p data-t="sky-enclave">A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.</p></div>
+      <div><code>sunriser sky deploy</code><p data-t="sky-deploy">Builds your app with a buildpack, pushes the image and runs it on your Kubernetes cluster. You don't need a Dockerfile or YAML.</p></div>
+      <div><code>sunriser sky process scale web=3</code><p data-t="sky-scale">Sets how many copies of each process run.</p></div>
+      <div><code>sunriser sky logs</code><p data-t="sky-logs">Shows the app's logs. When a pod can't run, Sky records an incident on the app.</p></div>
+      <div><code>isolation</code><p data-t="sky-isolation">Each app gets its own namespace. A network policy lets in only the app's own pods and the gateway.</p></div>
     </div>
   </section>
 
