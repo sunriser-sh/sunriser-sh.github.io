@@ -173,8 +173,8 @@ footer .end { margin-left: auto; }
     <div class="links">
       <a href="#products">Products</a>
       <a href="#guard">Guard</a>
-      <a href="#warrant">Warrant</a>
       <a href="#sky">Sky</a>
+      <a href="#warrant">Warrant</a>
       <a href="#hub">Hub</a>
       <a href="#hub">Advisories</a>
     </div>
@@ -297,15 +297,15 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
         <h3>Guard</h3>
         <p data-t="card-guard">A proxy that sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.</p>
       </a>
-      <a href="#warrant">
-        <span class="tag">Soon</span>
-        <h3>Warrant</h3>
-        <p data-t="card-warrant">Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.</p>
-      </a>
       <a href="#sky">
         <span class="tag">Soon</span>
         <h3>Sky</h3>
         <p data-t="card-sky">Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.</p>
+      </a>
+      <a href="#warrant">
+        <span class="tag">Soon</span>
+        <h3>Warrant</h3>
+        <p data-t="card-warrant">Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.</p>
       </a>
       <a href="#hub">
         <span class="tag">Soon</span>
@@ -377,16 +377,6 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
     </div>
   </section>
 
-  <section id="warrant">
-    <h2>Warrant <span class="tag">Soon</span><br><span class="dim" data-t="warrant-sub">Agent should have their own pass ticket to do something.</span></h2>
-    <div class="rows">
-      <div><code>warrant-view</code><p data-t="warrant-view">Read-only access to one namespace. Every agent starts here.</p></div>
-      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Can roll out new versions, but only in the namespace it's bound to.</p></div>
-      <div><code>warrant-operate</code><p data-t="warrant-operate">For day-two work such as scaling and restarts.</p></div>
-      <div><code>wrap --as shop/deploy-bot</code><p data-t="warrant-as">Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.</p></div>
-    </div>
-  </section>
-
   <section id="sky">
     <h2>Sky <span class="tag">Soon</span><br><span class="dim" data-t="sky-sub">Simplified way to ship, scale, and monitor your apps on any infrastructure securely.</span></h2>
     <div class="rows">
@@ -394,6 +384,16 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <div><code>sunriser sky scale web=3</code><p data-t="sky-scale">A beam is the unit of compute. You add or remove beams with one command.</p></div>
       <div><code>sunriser sky logs</code><p data-t="sky-logs">Shows app output together with every deploy, scale and config change. Each change says which agent made it.</p></div>
       <div><code>enclave</code><p data-t="sky-enclave">A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.</p></div>
+    </div>
+  </section>
+
+  <section id="warrant">
+    <h2>Warrant <span class="tag">Soon</span><br><span class="dim" data-t="warrant-sub">Agent should have their own pass ticket to do something.</span></h2>
+    <div class="rows">
+      <div><code>warrant-view</code><p data-t="warrant-view">Read-only access to one namespace. Every agent starts here.</p></div>
+      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Can roll out new versions, but only in the namespace it's bound to.</p></div>
+      <div><code>warrant-operate</code><p data-t="warrant-operate">For day-two work such as scaling and restarts.</p></div>
+      <div><code>wrap --as shop/deploy-bot</code><p data-t="warrant-as">Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.</p></div>
     </div>
   </section>
 

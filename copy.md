@@ -86,11 +86,11 @@ The five parts of sunriser
 ## card-guard (fits 110)
 A proxy that sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.
 
-## card-warrant (fits 110)
-Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.
-
 ## card-sky (fits 110)
 Runs the apps your agents build, straight from a git push. Each deploy runs under a warrant.
+
+## card-warrant (fits 110)
+Gives each agent a short-lived Kubernetes warrant for one role. The agent never holds your real credentials.
 
 ## card-hub (fits 110)
 A collector you host yourself. It pulls the audit logs from all your machines into one record.
@@ -146,23 +146,6 @@ The hash of the previous line, which chains the log together.
 ## field-head
 Printed by `verify`. Save it where the agent can't reach it, then compare it the next time you verify.
 
-# Warrant
-
-## warrant-sub (fits 60)
-Agent should have their own pass ticket to do something.
-
-## warrant-view
-Read-only access to one namespace. Every agent starts here.
-
-## warrant-deploy
-Can roll out new versions, but only in the namespace it's bound to.
-
-## warrant-operate
-For day-two work such as scaling and restarts.
-
-## warrant-as
-Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.
-
 # Sky
 
 ## sky-sub (fits 60)
@@ -179,6 +162,23 @@ Shows app output together with every deploy, scale and config change. Each chang
 
 ## sky-enclave
 A private network for apps that must be kept apart from the rest. To deploy into one, an agent needs a warrant bound to that enclave.
+
+# Warrant
+
+## warrant-sub (fits 60)
+Agent should have their own pass ticket to do something.
+
+## warrant-view
+Read-only access to one namespace. Every agent starts here.
+
+## warrant-deploy
+Can roll out new versions, but only in the namespace it's bound to.
+
+## warrant-operate
+For day-two work such as scaling and restarts.
+
+## warrant-as
+Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.
 
 # Hub and advisories
 
