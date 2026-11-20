@@ -149,7 +149,7 @@ Guard starts the server under that identity with a short-lived token. Every call
 # Hub and advisories
 
 ## hub-sub (fits 60)
-One log for all your machines, and a list of what to upgrade.
+Your help to upgrade your systems.
 
 ## hub-title
 Self-hosted collector
