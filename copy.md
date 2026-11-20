@@ -109,10 +109,10 @@ You don't need an account. The log is a file on your disk.
 # The log line
 
 ## log
-Every call is one line of JSON
+Every action leaves one line in the log
 
 ## log-sub (fits 60)
-It records what happened, in lines jq and grep can read.
+Each line says who did what and when. You can search it like any text file.
 
 ## field-client
 The name the agent gave in its MCP handshake.
@@ -132,7 +132,7 @@ Printed by `verify`. Save it where the agent can't reach it, then compare it the
 # Warrant
 
 ## warrant-sub (fits 60)
-The agent works with a warrant instead of your keys.
+The agent gets a pass that works for one job and soon runs out. Your own keys stay with you.
 
 ## warrant-view
 Read-only access to one namespace. Every agent starts here.
