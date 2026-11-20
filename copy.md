@@ -118,7 +118,7 @@ One binary that keeps your
 AI SDLC secure as models evolve
 
 ## sun-text
-You don't need an account. The log is a tamper-evident file on your disk: each line carries the hash of the one before.
+Controllable and auditable.
 
 # The log line
 
