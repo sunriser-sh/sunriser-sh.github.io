@@ -66,9 +66,6 @@ no config file? pass it inline
 ## products
 The five parts of sunriser
 
-## products-sub (fits 60)
-Guard is in preview. The other four are still being built.
-
 ## card-guard (fits 110)
 A proxy that sits in front of any MCP server. It hides the tools you deny and logs every call in a hash chain.
 
