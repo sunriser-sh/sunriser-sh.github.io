@@ -95,7 +95,7 @@ h2 { font-size: clamp(28px, 3.6vw, 40px); }
 .setup-copy p { color: var(--mute); margin-top: 10px; }
 .setup-copy code { font-size: 13px; }
 .add, .panel b { color: var(--sun); font-weight: 400; }
-.tabs { display: flex; gap: 24px; font-size: 15px; color: var(--dim); }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; color: var(--dim); }
 .tabs button { background: none; border: 0; color: inherit; font: inherit; padding: 0 0 8px; cursor: pointer; }
 .tabs button:hover { color: var(--mute); }
 .tabs button[aria-selected="true"] { color: var(--fg); box-shadow: inset 0 -1px 0 var(--fg); }
@@ -247,6 +247,8 @@ footer .end { margin-left: auto; }
       <div class="tabs" role="tablist">
         <button role="tab" aria-selected="true" data-tab="cc">Claude Code</button>
         <button role="tab" aria-selected="false" data-tab="cursor">Cursor</button>
+        <button role="tab" aria-selected="false" data-tab="pi">Pi</button>
+        <button role="tab" aria-selected="false" data-tab="opencode">OpenCode</button>
         <button role="tab" aria-selected="false" data-tab="any">Any MCP client</button>
       </div>
       <div class="panel" data-panel="cc">
@@ -260,6 +262,14 @@ footer .end { margin-left: auto; }
     "kubernetes": { "command": "sunriser", "args": ["wrap", <b>"kubernetes"</b>] }
   }
 }</code></pre>
+      </div>
+      <div class="panel" data-panel="pi" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code>pi mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
+      </div>
+      <div class="panel" data-panel="opencode" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code>opencode mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
       </div>
       <div class="panel" data-panel="any" hidden>
         <header><span>Any client</span><button class="copy">Copy</button></header>
