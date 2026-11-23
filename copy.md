@@ -30,6 +30,9 @@ Sunriser helps secure systems continuously as models, data, dependencies, and de
 ## soon
 The source will be public soon.
 
+## hero-credit
+Claude Monet, Impression, Sunrise, 1872
+
 # The chat next to the terminal
 
 ## chat-user
