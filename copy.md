@@ -21,10 +21,10 @@ sunriser sits between your coding agent and its MCP servers. It hides the tools 
 
 # Top of the page
 
-## hero (fits 50)
+## hero (fits 30)
 A Continuous-Security Approach for AI SDLC
 
-## hero-sub (fits 60)
+## hero-sub (fits 30)
 Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve
 
 ## soon
