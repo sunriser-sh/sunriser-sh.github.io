@@ -308,10 +308,10 @@ sunriser rule list</code></pre>
   </div>
 
   <section id="agents">
-    <h2><span data-t="agents">The agent can't skip your rules</span><br><span class="dim" data-t="agents-sub">The rules sit outside the agent, where no prompt can reach.</span></h2>
+    <h2><span data-t="agents">Rules enforced outside your agent</span><br><span class="dim" data-t="agents-sub">Deterministic checks on every tool call</span></h2>
     <p data-t="agents-text">Make the rules external managed, not in .md files.</p>
     <div class="rows">
-      <div><code>sunriser mcp</code><p data-t="agents-mcp">Lets the agent ask sunriser questions, such as what ran on a server last week.</p></div>
+      <div><code>sunriser mcp serve</code><p data-t="agents-mcp">Lets agents read the rules and the audit log.</p></div>
       <div><code>sunriser skill install</code><p data-t="agents-skill">Tells agents what action they cannot do, so they know in advance.</p></div>
     </div>
   </section>

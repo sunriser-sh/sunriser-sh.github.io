@@ -70,16 +70,16 @@ block tools by name
 # Why the agent can't skip the rules
 
 ## agents
-The agent can't skip your rules
+Rules enforced outside your agent
 
 ## agents-sub (fits 60)
-The rules sit outside the agent, where no prompt can reach.
+Deterministic checks on every tool call
 
 ## agents-text
 Make the rules external managed, not in .md files.
 
 ## agents-mcp
-Lets the agent ask sunriser questions, such as what ran on a server last week.
+Lets agents read the rules and the audit log.
 
 ## agents-skill
 Tells agents what action they cannot do, so they know in advance.
