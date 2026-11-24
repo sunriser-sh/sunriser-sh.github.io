@@ -263,21 +263,18 @@ breaks       kubernetes 1.32       removes an API you still use</div>
       </div>
       <div class="panel" data-panel="auto">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code><s># <span data-t="adopt-1">reads Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code</span></s>
+<pre><code><s># <span data-t="adopt-1">Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code.</span></s>
 sunriser mcp discover
 
-<s># <span data-t="adopt-2">makes your agent run sunriser wrap sky. Restart the agent after.</span></s>
+<s># <span data-t="adopt-2">Wrap your agent with sunriser.</span></s>
 sunriser mcp adopt <b>sky</b></code></pre>
       </div>
       <div class="panel" data-panel="any" hidden>
         <header><span>Any client</span><button class="copy">Copy</button></header>
-<pre><code><s># <span data-t="any-0">tell sunriser what the server runs</span></s>
-sunriser mcp set sky --command 'sky mcp'
-
-<s># <span data-t="any-1">the command the client runs</span></s>
+<pre><code>sunriser mcp set sky --command 'sky mcp'
 sunriser wrap <b>sky</b>
 
-<s># <span data-t="any-2">no config file? pass it inline</span></s>
+<s># <span data-t="any-2">inline config</span></s>
 sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code></pre>
       </div>
     </div>
@@ -297,13 +294,13 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
 <pre><code>sunriser preset list
 
-<s># <span data-t="preset-1">careful blocks deleting, secrets and access changes</span></s>
+<s># <span data-t="preset-1">apply the ruleset</span></s>
 sunriser preset set sky <b>careful</b></code></pre>
       </div>
       <div class="panel" data-panel="custom" hidden>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code><s># <span data-t="custom-1">block tools by name or pattern, and say why</span></s>
-sunriser rule add sky <b>'*_delete'</b> --why 'deleting needs a person'
+<pre><code><s># <span data-t="custom-1">block tools by name</span></s>
+sunriser rule add sky <b>'*_delete'</b> --why 'should be invoked by human'
 
 sunriser rule list</code></pre>
       </div>

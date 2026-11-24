@@ -50,28 +50,22 @@ Ask your agent anything…
 Wrap your agent mcp server with sunriser
 
 ## adopt-1
-reads Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code
+Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code.
 
 ## adopt-2
-makes your agent run sunriser wrap sky. Restart the agent after.
-
-## any-0
-tell sunriser what the server runs
-
-## any-1
-the command the client runs
+Wrap your agent with sunriser.
 
 ## any-2
-no config file? pass it inline
+inline config
 
 ## step2-title
 Choose preset rules or custom rules
 
 ## preset-1
-careful blocks deleting, secrets and access changes
+apply the ruleset
 
 ## custom-1
-block tools by name or pattern, and say why
+block tools by name
 
 # Why the agent can't skip the rules
 
