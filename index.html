@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-t="title">Sunriser: Secure your ADLC</title>
-<meta name="description" content="sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.">
+<meta name="description" content="A Continuous-Security Approach for AI SDLC. Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -322,7 +322,7 @@ sunriser rule list</code></pre>
       <a href="#guard">
         <span class="tag on">Preview</span>
         <h3>Guard</h3>
-        <p data-t="card-guard">Per-tool, per-action control for MCP servers. Denied actions leave the tool list, and every call is logged.</p>
+        <p data-t="card-guard">Action Guardrails for your MCP servers. Blocks unneeded agent actions and audits every call.</p>
       </a>
       <a href="#sky">
         <span class="tag">Soon</span>
@@ -332,12 +332,12 @@ sunriser rule list</code></pre>
       <a href="#warrant">
         <span class="tag">Soon</span>
         <h3>Warrant</h3>
-        <p data-t="card-warrant">A single-purpose, least-privilege identity per agent. It limits the blast radius and holds none of your keys.</p>
+        <p data-t="card-warrant">Least-privilege identity for each agent. Short-lived access that limits the blast radius.</p>
       </a>
       <a href="#hub">
         <span class="tag">Soon</span>
         <h3>Hub</h3>
-        <p data-t="card-hub">A collector you host. It gathers agent telemetry from all your machines and tells you what to upgrade and why.</p>
+        <p data-t="card-hub">Self-hosted collector for your agent telemetry. Tells you what to upgrade and why.</p>
       </a>
     </div>
   </section>
@@ -353,12 +353,12 @@ sunriser rule list</code></pre>
       <div>
         <span class="label">02 · audit</span>
         <h3>Audit</h3>
-        <p data-t="guard-audit">Guard writes each call as one line of JSON: who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.</p>
+        <p data-t="guard-audit">Guard audits every tool call your agents make.</p>
       </div>
       <div>
         <span class="label">03 · verify</span>
         <h3>Verify</h3>
-        <p data-t="guard-verify">Every line includes the hash of the line before it. If someone changes or removes a line, <code>audit verify</code> points to the first one.</p>
+        <p data-t="guard-verify">Guard verifies your log chain has not been tampered with.</p>
       </div>
     </div>
   </section>
@@ -390,11 +390,11 @@ sunriser rule list</code></pre>
   <span class="k">"prev"</span>: "6a5ea612…"
 }</div>
       <div class="fields">
-        <code>client</code><span data-t="field-client">The name the agent gave in its MCP handshake.</span>
-        <code>decision</code><span data-t="field-decision">Either allowed or blocked, according to your deny list.</span>
-        <code>agent</code><span data-t="field-agent">The pid of the process that started the wrap. All servers from one agent session share it.</span>
-        <code>prev</code><span data-t="field-prev">The hash of the previous line, which chains the log together.</span>
-        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Save it where the agent can't reach it, then compare it the next time you verify.</span>
+        <code>client</code><span data-t="field-client">The name the agent reports for itself.</span>
+        <code>decision</code><span data-t="field-decision">Allowed or blocked by your rules.</span>
+        <code>agent</code><span data-t="field-agent">The agent process that started the call.</span>
+        <code>prev</code><span data-t="field-prev">The hash of the previous line. It chains the log.</span>
+        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Keep it away from your agent and compare it next time.</span>
       </div>
     </div>
   </section>
@@ -402,9 +402,9 @@ sunriser rule list</code></pre>
   <section id="sky">
     <h2>Sky <span class="tag">Soon</span><br><span class="dim" data-t="sky-sub">Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.</span></h2>
     <div class="rows">
-      <div><code>sky deploy</code><p data-t="sky-deploy">Builds your app with a buildpack, pushes the image and runs it on your Kubernetes cluster. You don't need a Dockerfile or YAML.</p></div>
-      <div><code>sky process scale web=3</code><p data-t="sky-scale">Sets how many copies of each process run.</p></div>
-      <div><code>sky logs</code><p data-t="sky-logs">Shows the app's logs. When a pod can't run, Sky records an incident on the app.</p></div>
+      <div><code>sky deploy</code><p data-t="sky-deploy">Ship your app to your Kubernetes cluster without a Dockerfile or YAML.</p></div>
+      <div><code>sky process scale web=3</code><p data-t="sky-scale">Scale each process of your app.</p></div>
+      <div><code>sky logs</code><p data-t="sky-logs">Monitor your app with logs and incidents.</p></div>
     </div>
   </section>
 
@@ -412,9 +412,9 @@ sunriser rule list</code></pre>
     <h2>Warrant <span class="tag">Soon</span><br><span class="dim" data-t="warrant-sub">Agent should have their own pass ticket to do something.</span></h2>
     <div class="rows">
       <div><code>warrant-view</code><p data-t="warrant-view">Read-only access to one namespace. Every agent starts here.</p></div>
-      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Can roll out new versions, but only in the namespace it's bound to.</p></div>
-      <div><code>warrant-operate</code><p data-t="warrant-operate">For day-two work such as scaling and restarts.</p></div>
-      <div><code>wrap --as shop/deploy-bot</code><p data-t="warrant-as">Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.</p></div>
+      <div><code>warrant-deploy</code><p data-t="warrant-deploy">Roll out new versions in one namespace.</p></div>
+      <div><code>warrant-operate</code><p data-t="warrant-operate">Day-two operations: scaling and restarts.</p></div>
+      <div><code>wrap --as shop/deploy-bot</code><p data-t="warrant-as">Guard runs your MCP server under a warrant. Every call is audited with its identity.</p></div>
     </div>
   </section>
 
@@ -424,17 +424,17 @@ sunriser rule list</code></pre>
       <div>
         <span class="label">logs</span>
         <h3 data-t="hub-title">Self-hosted collector</h3>
-        <p data-t="hub">Once agents run on more than one machine, Hub collects their logs into one record. You host it yourself, so the logs stay inside your network.</p>
+        <p data-t="hub">Collects audit logs from all your machines into one record. Self-hosted, so your logs stay in your network.</p>
       </div>
       <div>
         <span class="label">advisories</span>
         <h3 data-t="advisories-title">What to upgrade and why</h3>
-        <p data-t="advisories">Hub checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.</p>
+        <p data-t="advisories">Checks your systems for exploited CVEs, end-of-life versions, breaking upgrades, and risky MCP tools. Advisories are YAML files in a public repo, open to anyone.</p>
       </div>
       <div>
         <span class="label">no</span>
         <h3 data-t="out-title">What stays out</h3>
-        <p data-t="out">There won't be a marketplace or a hosted service. sunriser doesn't score risk and doesn't collect telemetry.</p>
+        <p data-t="out">Sunriser is not a marketplace or a hosted service. It does not score risk or collect your telemetry.</p>
       </div>
     </div>
   </section>

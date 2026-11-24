@@ -17,7 +17,7 @@ The `index.html` in the repo may show older text. The build fills in the new tex
 Sunriser: Secure your ADLC
 
 ## description
-sunriser sits between your coding agent and its MCP servers. It hides the tools you deny and logs every call, so you can check later what the agent did.
+A Continuous-Security Approach for AI SDLC. Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve.
 
 # Top of the page
 
@@ -90,16 +90,16 @@ Tells agents what action they cannot do, so they know in advance.
 The four parts of sunriser
 
 ## card-guard (fits 110)
-Per-tool, per-action control for MCP servers. Denied actions leave the tool list, and every call is logged.
+Action Guardrails for your MCP servers. Blocks unneeded agent actions and audits every call.
 
 ## card-sky (fits 110)
 A platform as a service for your apps. Build, Deploy, and Maintain with it.
 
 ## card-warrant (fits 110)
-A single-purpose, least-privilege identity per agent. It limits the blast radius and holds none of your keys.
+Least-privilege identity for each agent. Short-lived access that limits the blast radius.
 
 ## card-hub (fits 110)
-A collector you host. It gathers agent telemetry from all your machines and tells you what to upgrade and why.
+Self-hosted collector for your agent telemetry. Tells you what to upgrade and why.
 
 # Guard
 
@@ -110,10 +110,10 @@ Action Guardrails to automated prevention by blocking unneeded agent actions
 Guard wraps your MCP servers via command line.
 
 ## guard-audit
-Guard writes each call as one line of JSON: who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.
+Guard audits every tool call your agents make.
 
 ## guard-verify
-Every line includes the hash of the line before it. If someone changes or removes a line, `audit verify` points to the first one.
+Guard verifies your log chain has not been tampered with.
 
 # The orange block
 
@@ -135,19 +135,19 @@ Every action is audited
 A searchable log chain records who did what and when.
 
 ## field-client
-The name the agent gave in its MCP handshake.
+The name the agent reports for itself.
 
 ## field-decision
-Either allowed or blocked, according to your deny list.
+Allowed or blocked by your rules.
 
 ## field-agent
-The pid of the process that started the wrap. All servers from one agent session share it.
+The agent process that started the call.
 
 ## field-prev
-The hash of the previous line, which chains the log together.
+The hash of the previous line. It chains the log.
 
 ## field-head
-Printed by `verify`. Save it where the agent can't reach it, then compare it the next time you verify.
+Printed by `verify`. Keep it away from your agent and compare it next time.
 
 # Sky
 
@@ -155,13 +155,13 @@ Printed by `verify`. Save it where the agent can't reach it, then compare it the
 Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
 
 ## sky-deploy
-Builds your app with a buildpack, pushes the image and runs it on your Kubernetes cluster. You don't need a Dockerfile or YAML.
+Ship your app to your Kubernetes cluster without a Dockerfile or YAML.
 
 ## sky-scale
-Sets how many copies of each process run.
+Scale each process of your app.
 
 ## sky-logs
-Shows the app's logs. When a pod can't run, Sky records an incident on the app.
+Monitor your app with logs and incidents.
 # Warrant
 
 ## warrant-sub (fits 60)
@@ -171,13 +171,13 @@ Agent should have their own pass ticket to do something.
 Read-only access to one namespace. Every agent starts here.
 
 ## warrant-deploy
-Can roll out new versions, but only in the namespace it's bound to.
+Roll out new versions in one namespace.
 
 ## warrant-operate
-For day-two work such as scaling and restarts.
+Day-two operations: scaling and restarts.
 
 ## warrant-as
-Guard starts the server under that identity with a short-lived token. Every call in the log shows who it ran as.
+Guard runs your MCP server under a warrant. Every call is audited with its identity.
 
 # Hub
 
@@ -188,19 +188,19 @@ Your help to upgrade your systems.
 Self-hosted collector
 
 ## hub
-Once agents run on more than one machine, Hub collects their logs into one record. You host it yourself, so the logs stay inside your network.
+Collects audit logs from all your machines into one record. Self-hosted, so your logs stay in your network.
 
 ## advisories-title
 What to upgrade and why
 
 ## advisories
-Hub checks one list against what you run: CVEs that are being exploited, versions past end-of-life, upgrades known to break things, and MCP tools that are risky to allow. Each finding is a YAML file in a public repo, and anyone can add one.
+Checks your systems for exploited CVEs, end-of-life versions, breaking upgrades, and risky MCP tools. Advisories are YAML files in a public repo, open to anyone.
 
 ## out-title
 What stays out
 
 ## out
-There won't be a marketplace or a hosted service. sunriser doesn't score risk and doesn't collect telemetry.
+Sunriser is not a marketplace or a hosted service. It does not score risk or collect your telemetry.
 
 # Bottom of the page
 
