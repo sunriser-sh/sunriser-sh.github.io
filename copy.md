@@ -53,10 +53,7 @@ Give your MCP server a name.
 Keep the MCP server you already run. Put its command in this file, with the tools the agent shouldn't get.
 
 ## step2-title
-Point your agent at that name.
-
-## step2
-That's the only change to the agent's config. You can edit the deny list later without touching it again.
+Wrap your agent mcp server with sunriser
 
 ## any-1
 the command the client runs
