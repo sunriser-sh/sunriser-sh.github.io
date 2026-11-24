@@ -216,6 +216,7 @@ footer .end { margin-left: auto; }
     <div class="win">
       <header><b></b><b></b><b></b><span>~/infra — sunriser</span></header>
 <!-- Each line below is what the command prints. Long build output is left out. -->
+<!-- The advisory command is planned, not built. Its lines are a draft, so it is marked soon. -->
 <div class="term"><span class="p">$ sky deploy</span>
   <span class="o">●</span> Deployed api (4f2a91c)
   → https://api.example.com
@@ -231,7 +232,12 @@ footer .end { margin-left: auto; }
 <span class="p">$ sunriser audit verify</span>
 /home/you/.sunriser/audit.jsonl
   lines 1284  chain intact
-  head 154b0dc14a63c84285807d7a3ca681f2c2593ff4d5dda382a226ea0df62ef382</div>
+  head 154b0dc14a63c84285807d7a3ca681f2c2593ff4d5dda382a226ea0df62ef382
+
+<span class="p">$ sunriser advisory check</span>  # soon
+exploited    litellm 1.82.0        fixed in 1.83.7
+end-of-life  ingress-nginx 1.12.1  retired, no fix will come
+breaks       kubernetes 1.32       removes an API you still use</div>
       <div class="side">
         <div class="msg" data-t="chat-user">Drain node pool b, then restart the api.</div>
         <div class="msg agent" data-t="chat-agent">Called <em>node_management</em> to drain. It returned <em>blocked by policy</em>, so I stopped there. Restarting the api without a drain needs your call.</div>
