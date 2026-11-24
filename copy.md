@@ -47,19 +47,31 @@ Ask your agent anything…
 # Setup steps
 
 ## step1-title
-Give your MCP server a name.
-
-## step1
-Keep the MCP server you already run. Put its command in this file, with the tools the agent shouldn't get.
-
-## step2-title
 Wrap your agent mcp server with sunriser
+
+## adopt-1
+reads Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code
+
+## adopt-2
+makes your agent run sunriser wrap sky. Restart the agent after.
+
+## any-0
+tell sunriser what the server runs
 
 ## any-1
 the command the client runs
 
 ## any-2
 no config file? pass it inline
+
+## step2-title
+Choose preset rules or custom rules
+
+## preset-1
+careful blocks deleting, secrets and access changes
+
+## custom-1
+block tools by name or pattern, and say why
 
 # Why the agent can't skip the rules
 

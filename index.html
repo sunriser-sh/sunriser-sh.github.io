@@ -254,74 +254,58 @@ breaks       kubernetes 1.32       removes an API you still use</div>
   <div class="setup">
     <div class="setup-copy">
       <span class="label">Step 1</span>
-      <h3 data-t="step1-title">Give your MCP server a name.</h3>
-      <p data-t="step1">Keep the MCP server you already run. Put its command in this file, with the tools the agent shouldn't get.</p>
+      <h3 data-t="step1-title">Wrap your agent mcp server with sunriser</h3>
     </div>
-    <div class="panel">
-      <header><span>~/.sunriser/config.json</span><button class="copy">Copy</button></header>
-<pre><code>{
-  "servers": {
-    <b>"sky"</b>: {
-      "command": ["sky", "mcp"],
-      "deny": ["cluster_delete", "app_delete"]
-    },
-    <b>"kubernetes"</b>: {
-      "command": ["npx", "mcp-server-kubernetes"],
-      "deny": [
-        "kubectl_delete", "kubectl_generic",
-        "node_*", "uninstall_*"
-      ]
-    }
-  }
-}</code></pre>
+    <div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="auto">Automatic</button>
+        <button role="tab" aria-selected="false" data-tab="any">Any MCP client</button>
+      </div>
+      <div class="panel" data-panel="auto">
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="adopt-1">reads Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code</span></s>
+sunriser mcp discover
+
+<s># <span data-t="adopt-2">makes your agent run sunriser wrap sky. Restart the agent after.</span></s>
+sunriser mcp adopt <b>sky</b></code></pre>
+      </div>
+      <div class="panel" data-panel="any" hidden>
+        <header><span>Any client</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="any-0">tell sunriser what the server runs</span></s>
+sunriser mcp set sky --command 'sky mcp'
+
+<s># <span data-t="any-1">the command the client runs</span></s>
+sunriser wrap <b>sky</b>
+
+<s># <span data-t="any-2">no config file? pass it inline</span></s>
+sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="setup">
     <div class="setup-copy">
       <span class="label">Step 2</span>
-      <h3 data-t="step2-title">Wrap your agent mcp server with sunriser</h3>
+      <h3 data-t="step2-title">Choose preset rules or custom rules</h3>
     </div>
     <div>
       <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-tab="cc">Claude Code</button>
-        <button role="tab" aria-selected="false" data-tab="cursor">Cursor</button>
-        <button role="tab" aria-selected="false" data-tab="pi">Pi</button>
-        <button role="tab" aria-selected="false" data-tab="opencode">OpenCode</button>
-        <button role="tab" aria-selected="false" data-tab="any">Any MCP client</button>
+        <button role="tab" aria-selected="true" data-tab="preset">Preset rules</button>
+        <button role="tab" aria-selected="false" data-tab="custom">Custom rules</button>
       </div>
-      <div class="panel" data-panel="cc">
+      <div class="panel" data-panel="preset">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>claude mcp add sky -- sunriser wrap <b>sky</b>
-claude mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
-      </div>
-      <div class="panel" data-panel="cursor" hidden>
-        <header><span>~/.cursor/mcp.json</span><button class="copy">Copy</button></header>
-<pre><code>{
-  "mcpServers": {
-    "sky": { "command": "sunriser", "args": ["wrap", <b>"sky"</b>] },
-    "kubernetes": { "command": "sunriser", "args": ["wrap", <b>"kubernetes"</b>] }
-  }
-}</code></pre>
-      </div>
-      <div class="panel" data-panel="pi" hidden>
-        <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>pi mcp add sky -- sunriser wrap <b>sky</b>
-pi mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
-      </div>
-      <div class="panel" data-panel="opencode" hidden>
-        <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>opencode mcp add sky -- sunriser wrap <b>sky</b>
-opencode mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
-      </div>
-      <div class="panel" data-panel="any" hidden>
-        <header><span>Any client</span><button class="copy">Copy</button></header>
-<pre><code><s># <span data-t="any-1">the command the client runs</span></s>
-sunriser wrap <b>sky</b>
-sunriser wrap <b>kubernetes</b>
+<pre><code>sunriser preset list
 
-<s># <span data-t="any-2">no config file? pass it inline</span></s>
-sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code></pre>
+<s># <span data-t="preset-1">careful blocks deleting, secrets and access changes</span></s>
+sunriser preset set sky <b>careful</b></code></pre>
+      </div>
+      <div class="panel" data-panel="custom" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="custom-1">block tools by name or pattern, and say why</span></s>
+sunriser rule add sky <b>'*_delete'</b> --why 'deleting needs a person'
+
+sunriser rule list</code></pre>
       </div>
     </div>
   </div>
@@ -470,9 +454,11 @@ document.querySelectorAll(".copy").forEach(b => b.onclick = async () => {
   setTimeout(() => b.textContent = "Copy", 1400);
 });
 
+// Each step has its own tabs, so a click only changes the step it is in.
 document.querySelectorAll("[data-tab]").forEach(t => t.onclick = () => {
-  document.querySelectorAll("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === t));
-  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
+  const step = t.closest(".setup");
+  step.querySelectorAll("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === t));
+  step.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
 });
 
 // ASCII sunrise: density falls off with distance from a sun below the bottom edge.
