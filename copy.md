@@ -104,10 +104,10 @@ A collector you host. It gathers agent telemetry from all your machines and tell
 # Guard
 
 ## guard-sub (fits 60)
-It protects you from unwanted actions.
+Action Guardrails to automated prevention by blocking unneeded agent actions
 
 ## guard-wrap
-Guard sits in front of any MCP server that speaks stdio. It removes the tools you deny from the tool list, so the agent doesn't see them. If the agent calls one anyway, it gets "blocked by policy" back and nothing runs.
+Guard wraps your MCP servers via command line.
 
 ## guard-audit
 Guard writes each call as one line of JSON: who asked, which tool, whether it was allowed, and how long it took. You can filter the log by tool, server or time.
