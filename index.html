@@ -57,15 +57,16 @@ h2 { font-size: clamp(28px, 3.6vw, 40px); }
 
 /* hero */
 .hero { display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center; padding: 72px 0 48px; }
-.hero img { display: block; width: 100%; height: auto; border-radius: 12px; }
+/* The picture is 220 pixels across and is scaled up. Pixelated keeps each one a sharp square. */
+.hero img { display: block; width: 100%; height: auto; border-radius: 12px; image-rendering: pixelated; }
 /* The credit shows only while the pointer is over the picture. Screen readers still read it. */
 .hero figure { position: relative; }
 .hero figcaption { position: absolute; left: 10px; bottom: 10px; padding: 4px 8px; border-radius: 6px; background: rgba(17, 17, 17, .82); font-size: 12px; opacity: 0; transition: opacity .15s; pointer-events: none; }
 .hero figure:hover figcaption { opacity: 1; }
 @media (max-width: 1000px) {
   .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; }
-  /* The painting is shown whole, so in one column it gets a width limit. */
-  .hero figure { max-width: 560px; }
+  /* Twice the picture's own width, so every pixel stays a whole square. */
+  .hero figure { max-width: 440px; }
 }
 .hero .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
 .soon { margin-top: 32px; color: var(--mute); font-size: 15px; }
@@ -201,7 +202,7 @@ footer .end { margin-left: auto; }
     <p class="soon"><span class="tag on">Private preview</span><span data-t="soon">The source will be public soon.</span></p>
     </div>
     <figure>
-      <img src="impression-sunrise.webp" width="1280" height="993" alt="A painting of an orange sun rising over a misty harbour, with small boats on the water.">
+      <img src="impression-sunrise.webp" width="220" height="171" alt="A painting of an orange sun rising over a misty harbour, with small boats on the water, redrawn in large pixels.">
       <figcaption data-t="hero-credit">Claude Monet, Impression, Sunrise, 1872</figcaption>
     </figure>
   </div>
