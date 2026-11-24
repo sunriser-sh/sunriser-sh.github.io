@@ -36,10 +36,10 @@ Claude Monet, Impression, Sunrise, 1872
 # The chat next to the terminal
 
 ## chat-user
-Drain node pool b, then restart the api.
+Deploy the api, then delete the staging cluster.
 
 ## chat-agent
-Called *node_management* to drain. It returned *blocked by policy*, so I stopped there. Restarting the api without a drain needs your call.
+The api is deployed. I called *cluster_delete* for staging. It returned *blocked by policy*, so I stopped there. Deleting the cluster needs your call.
 
 ## chat-ask
 Ask your agent anything…

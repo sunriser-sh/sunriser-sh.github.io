@@ -215,19 +215,24 @@ footer .end { margin-left: auto; }
   <div class="stage">
     <div class="win">
       <header><b></b><b></b><b></b><span>~/infra — sunriser</span></header>
-<!-- Each line below is what the command prints. Long build output is left out. -->
+<!-- Each line below is what the command prints. The one long line from adopt is wrapped. -->
+<!-- The agent reaches Sky through its MCP server, `sky mcp`, so the log lines name Sky's tools. -->
 <!-- The advisory command is planned, not built. Its lines are a draft, so it is marked soon. -->
-<div class="term"><span class="p">$ sky deploy</span>
-  <span class="o">●</span> Deployed api (4f2a91c)
-  → https://api.example.com
+<div class="term"><span class="p">$ sunriser mcp discover</span>
+NAME        CLIENT       STATE      COMMAND
+sky         claude-code  <span class="b">unguarded</span>  sky mcp
+kubernetes  cursor       <span class="o">guarded</span>    sunriser wrap kubernetes
 
-<span class="p">$ sky process scale web=3</span>
-  <span class="o">●</span> web → 3 replicas
+1 unguarded. Run `sunriser mcp adopt &lt;name&gt;` to put guard in front.
+
+<span class="p">$ sunriser mcp adopt sky</span>
+sky is now behind guard. Restart the agent, then deny tools with
+`sunriser rule add sky &lt;tool&gt;` or in `sunriser ui`.
 
 <span class="p">$ sunriser audit list -n 3</span>
-2026-11-03T11:42:51Z  <span class="o">allowed</span>      38ms  claude-code/2.1  kubectl_get {"resourceType":"pods"}
+2026-11-03T11:42:51Z  <span class="o">allowed</span>   48210ms  claude-code/2.1  deploy {"dir":"/home/you/api"}
 2026-11-03T11:43:00Z  <span class="b">blocked</span>       0ms  cursor/1.4       kubectl_delete {"name":"api-7d9f"}
-2026-11-03T11:43:09Z  <span class="b">blocked</span>       0ms  claude-code/2.1  node_management {"operation":"drain"}
+2026-11-03T11:43:09Z  <span class="b">blocked</span>       0ms  claude-code/2.1  cluster_delete {"args":["staging"]}
 
 <span class="p">$ sunriser audit verify</span>
 /home/you/.sunriser/audit.jsonl
@@ -239,8 +244,8 @@ exploited    litellm 1.82.0        fixed in 1.83.7
 end-of-life  ingress-nginx 1.12.1  retired, no fix will come
 breaks       kubernetes 1.32       removes an API you still use</div>
       <div class="side">
-        <div class="msg" data-t="chat-user">Drain node pool b, then restart the api.</div>
-        <div class="msg agent" data-t="chat-agent">Called <em>node_management</em> to drain. It returned <em>blocked by policy</em>, so I stopped there. Restarting the api without a drain needs your call.</div>
+        <div class="msg" data-t="chat-user">Deploy the api, then delete the staging cluster.</div>
+        <div class="msg agent" data-t="chat-agent">The api is deployed. I called <em>cluster_delete</em> for staging. It returned <em>blocked by policy</em>, so I stopped there. Deleting the cluster needs your call.</div>
         <div class="ask" data-t="chat-ask">Ask your agent anything…</div>
       </div>
     </div>
@@ -256,6 +261,10 @@ breaks       kubernetes 1.32       removes an API you still use</div>
       <header><span>~/.sunriser/config.json</span><button class="copy">Copy</button></header>
 <pre><code>{
   "servers": {
+    <b>"sky"</b>: {
+      "command": ["sky", "mcp"],
+      "deny": ["cluster_delete", "app_delete"]
+    },
     <b>"kubernetes"</b>: {
       "command": ["npx", "mcp-server-kubernetes"],
       "deny": [
@@ -284,27 +293,32 @@ breaks       kubernetes 1.32       removes an API you still use</div>
       </div>
       <div class="panel" data-panel="cc">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>claude mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
+<pre><code>claude mcp add sky -- sunriser wrap <b>sky</b>
+claude mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
       </div>
       <div class="panel" data-panel="cursor" hidden>
         <header><span>~/.cursor/mcp.json</span><button class="copy">Copy</button></header>
 <pre><code>{
   "mcpServers": {
+    "sky": { "command": "sunriser", "args": ["wrap", <b>"sky"</b>] },
     "kubernetes": { "command": "sunriser", "args": ["wrap", <b>"kubernetes"</b>] }
   }
 }</code></pre>
       </div>
       <div class="panel" data-panel="pi" hidden>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>pi mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
+<pre><code>pi mcp add sky -- sunriser wrap <b>sky</b>
+pi mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
       </div>
       <div class="panel" data-panel="opencode" hidden>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
-<pre><code>opencode mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
+<pre><code>opencode mcp add sky -- sunriser wrap <b>sky</b>
+opencode mcp add kubernetes -- sunriser wrap <b>kubernetes</b></code></pre>
       </div>
       <div class="panel" data-panel="any" hidden>
         <header><span>Any client</span><button class="copy">Copy</button></header>
 <pre><code><s># <span data-t="any-1">the command the client runs</span></s>
+sunriser wrap <b>sky</b>
 sunriser wrap <b>kubernetes</b>
 
 <s># <span data-t="any-2">no config file? pass it inline</span></s>
