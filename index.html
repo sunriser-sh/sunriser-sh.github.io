@@ -262,6 +262,7 @@ footer .end { margin-left: auto; }
       <header><b></b><b></b><b></b><span>~/infra — sunriser</span></header>
 <!-- Each line below is what the command prints. The one long line from adopt is wrapped. -->
 <!-- The example server is GitHub's own MCP server, `github-mcp-server stdio`, so the log lines name its tools. -->
+<!-- The last log line is a shell command, `gh`, caught by the hook. `audit list` prints the command itself. -->
 <!-- The advisory command is planned, not built. Its lines are a draft, so it is marked soon. -->
 <div class="term"><span class="p">$ sunriser mcp discover</span>
 NAME        CLIENT       STATE      COMMAND
@@ -276,8 +277,8 @@ github is now behind guard. Restart the agent, then deny tools with
 
 <span class="p">$ sunriser audit list -n 3</span>
 2026-11-03T11:42:51Z  <span class="o">allowed</span>     812ms  claude-code/2.1  create_pull_request {"head":"fix"}
-2026-11-03T11:43:00Z  <span class="b">blocked</span>       0ms  cursor/1.4       kubectl_delete {"name":"api-7d9f"}
-2026-11-03T11:43:09Z  <span class="b">blocked</span>       0ms  claude-code/2.1  merge_pull_request {"pullNumber":42}
+2026-11-03T11:43:00Z  <span class="b">blocked</span>       0ms  claude-code/2.1  merge_pull_request {"pullNumber":42}
+2026-11-03T11:43:09Z  <span class="b">blocked</span>       0ms  pi               gh pr merge 42
 
 <span class="p">$ sunriser audit verify</span>
 /home/you/.sunriser/audit.jsonl
@@ -299,12 +300,13 @@ breaks       kubernetes 1.32       removes an API you still use</div>
   <div class="setup">
     <div class="setup-copy">
       <span class="label">Step 1</span>
-      <h3 data-t="step1-title">Wrap your agent mcp server with sunriser</h3>
+      <h3 data-t="step1-title">Put sunriser in front of your agent's MCP servers and CLI tools</h3>
     </div>
     <div>
       <div class="tabs" role="tablist">
         <button role="tab" aria-selected="true" data-tab="auto">Automatic</button>
         <button role="tab" aria-selected="false" data-tab="any">Any MCP client</button>
+        <button role="tab" aria-selected="false" data-tab="cli">CLI tools</button>
       </div>
       <div class="panel" data-panel="auto">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
@@ -322,6 +324,14 @@ sunriser wrap <b>github</b>
 <s># <span data-t="any-2">inline config</span></s>
 sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code></pre>
       </div>
+      <div class="panel" data-panel="cli" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="cli-1">Claude Code: gh, kubectl, terraform and every other shell command go through guard.</span></s>
+sunriser hook <b>install</b>
+
+<s># <span data-t="cli-2">The same for pi.</span></s>
+sunriser hook install <b>--agent pi</b></code></pre>
+      </div>
     </div>
   </div>
 
@@ -334,6 +344,7 @@ sunriser wrap --deny 'kubectl_delete,node_*' -- npx mcp-server-kubernetes</code>
       <div class="tabs" role="tablist">
         <button role="tab" aria-selected="true" data-tab="preset">Preset rules</button>
         <button role="tab" aria-selected="false" data-tab="custom">Custom rules</button>
+        <button role="tab" aria-selected="false" data-tab="clirules">CLI rules</button>
       </div>
       <div class="panel" data-panel="preset">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
@@ -346,6 +357,13 @@ sunriser preset set github <b>careful</b></code></pre>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
 <pre><code><s># <span data-t="custom-1">block tools by name</span></s>
 sunriser rule add github <b>merge_pull_request</b> --why 'should be invoked by human'
+
+sunriser rule list</code></pre>
+      </div>
+      <div class="panel" data-panel="clirules" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="clirules-1">block shell commands by pattern</span></s>
+sunriser rule add bash <b>'gh pr merge*'</b> --why 'should be invoked by human'
 
 sunriser rule list</code></pre>
       </div>
@@ -367,7 +385,7 @@ sunriser rule list</code></pre>
       <a href="#guard">
         <span class="tag on">Preview</span>
         <h3>Guard</h3>
-        <p data-t="card-guard">Action Guardrails for your MCP servers. Blocks unneeded agent actions and audits every call.</p>
+        <p data-t="card-guard">Action Guardrails for your MCP servers and CLI tools. Blocks unneeded agent actions and audits every call.</p>
       </a>
       <a href="#sky">
         <span class="tag">Soon</span>
@@ -434,7 +452,7 @@ sunriser rule list</code></pre>
       <div>
         <span class="label">01 · wrap</span>
         <h3>Wrap</h3>
-        <p data-t="guard-wrap">Guard wraps your MCP servers via command line.</p>
+        <p data-t="guard-wrap">Guard wraps your MCP servers and hooks your agent's shell.</p>
       </div>
       <div>
         <span class="label">02 · audit</span>

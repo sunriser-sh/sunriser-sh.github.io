@@ -47,7 +47,7 @@ Ask your agent anything…
 # Setup steps
 
 ## step1-title
-Wrap your agent mcp server with sunriser
+Put sunriser in front of your agent's MCP servers and CLI tools
 
 ## adopt-1
 Claude Code, Cursor, Pi, Claude Desktop, Windsurf and VS Code.
@@ -58,6 +58,12 @@ Wrap your agent with sunriser.
 ## any-2
 inline config
 
+## cli-1 (the CLI tools tab)
+Claude Code: gh, kubectl, terraform and every other shell command go through guard.
+
+## cli-2
+The same for pi.
+
 ## step2-title
 Choose preset rules or custom rules
 
@@ -66,6 +72,9 @@ apply the ruleset
 
 ## custom-1
 block tools by name
+
+## clirules-1 (the CLI rules tab)
+block shell commands by pattern
 
 # Why the agent can't skip the rules
 
@@ -90,7 +99,7 @@ Tells agents what action they cannot do, so they know in advance.
 The four parts of sunriser
 
 ## card-guard (fits 110)
-Action Guardrails for your MCP servers. Blocks unneeded agent actions and audits every call.
+Action Guardrails for your MCP servers and CLI tools. Blocks unneeded agent actions and audits every call.
 
 ## card-sky (fits 110)
 A platform as a service for your apps. Build, Deploy, and Maintain with it.
@@ -119,7 +128,7 @@ See what your agent tried, what ran, and where policy stepped in before it reach
 Every action passes through policy
 
 ## guard-wrap
-Guard wraps your MCP servers via command line.
+Guard wraps your MCP servers and hooks your agent's shell.
 
 ## guard-audit
 Guard audits every tool call your agents make.
