@@ -36,10 +36,10 @@ Claude Monet, Impression, Sunrise, 1872
 # The chat next to the terminal
 
 ## chat-user
-Deploy the api, then delete the staging cluster.
+Open a PR for the login fix, then merge it.
 
 ## chat-agent
-The api is deployed. I called *cluster_delete* for staging. It returned *blocked by policy*, so I stopped there. Deleting the cluster needs your call.
+The PR is open. I called *merge_pull_request*. It returned *blocked by policy*, so I stopped there. Merging needs your call.
 
 ## chat-ask
 Ask your agent anything…
@@ -105,6 +105,18 @@ Self-hosted collector for your agent telemetry. Tells you what to upgrade and wh
 
 ## guard-sub (fits 60)
 Action Guardrails to automated prevention by blocking unneeded agent actions
+
+## trace-1 (first line of the timeline heading)
+One agent run.
+
+## trace-2 (second line)
+Every tool call visible.
+
+## trace-text
+See what your agent tried, what ran, and where policy stepped in before it reached your systems.
+
+## trace-title (the line above the timeline)
+Every action passes through policy
 
 ## guard-wrap
 Guard wraps your MCP servers via command line.
