@@ -73,6 +73,15 @@ apply the ruleset
 ## custom-1
 block tools by name
 
+## custom-2
+or only when its arguments match
+
+## custom-3
+ask what the rules would do with one call
+
+## allow-1 (the Allow list tab)
+only these tools get through, new ones stay blocked
+
 ## clirules-1 (the CLI rules tab)
 block shell commands by pattern
 
@@ -131,10 +140,10 @@ Every action passes through policy
 Guard wraps your MCP servers and hooks your agent's shell.
 
 ## guard-audit
-Guard audits every tool call your agents make.
+Guard audits every tool call your agents make, and every rule change, even one made by hand.
 
 ## guard-verify
-Guard verifies your log chain has not been tampered with.
+Guard verifies your log chain has not been tampered with. Seal it with your SSH key so a rewrite shows.
 
 # The orange block
 
@@ -168,7 +177,7 @@ The agent process that started the call.
 The hash of the previous line. It chains the log.
 
 ## field-head
-Printed by `verify`. Keep it away from your agent and compare it next time.
+Printed by `verify`. Keep it away from your agent and check it next time with `verify --head`.
 
 # Nightstar
 

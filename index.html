@@ -345,6 +345,7 @@ sunriser hook install <b>--agent pi</b></code></pre>
         <button role="tab" aria-selected="true" data-tab="preset">Preset rules</button>
         <button role="tab" aria-selected="false" data-tab="custom">Custom rules</button>
         <button role="tab" aria-selected="false" data-tab="clirules">CLI rules</button>
+        <button role="tab" aria-selected="false" data-tab="allow">Allow list</button>
       </div>
       <div class="panel" data-panel="preset">
         <header><span>Terminal</span><button class="copy">Copy</button></header>
@@ -358,7 +359,11 @@ sunriser preset set github <b>careful</b></code></pre>
 <pre><code><s># <span data-t="custom-1">block tools by name</span></s>
 sunriser rule add github <b>merge_pull_request</b> --why 'should be invoked by human'
 
-sunriser rule list</code></pre>
+<s># <span data-t="custom-2">or only when its arguments match</span></s>
+sunriser rule add github <b>'push_files branch=main'</b> --why 'main takes a PR'
+
+<s># <span data-t="custom-3">ask what the rules would do with one call</span></s>
+sunriser rule test github push_files '{"branch":"main"}'</code></pre>
       </div>
       <div class="panel" data-panel="clirules" hidden>
         <header><span>Terminal</span><button class="copy">Copy</button></header>
@@ -366,6 +371,11 @@ sunriser rule list</code></pre>
 sunriser rule add bash <b>'gh pr merge*'</b> --why 'should be invoked by human'
 
 sunriser rule list</code></pre>
+      </div>
+      <div class="panel" data-panel="allow" hidden>
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="allow-1">only these tools get through, new ones stay blocked</span></s>
+sunriser mcp set github --allow <b>'get_*,list_*,search_*'</b></code></pre>
       </div>
     </div>
   </div>
@@ -457,12 +467,12 @@ sunriser rule list</code></pre>
       <div>
         <span class="label">02 · audit</span>
         <h3>Audit</h3>
-        <p data-t="guard-audit">Guard audits every tool call your agents make.</p>
+        <p data-t="guard-audit">Guard audits every tool call your agents make, and every rule change, even one made by hand.</p>
       </div>
       <div>
         <span class="label">03 · verify</span>
         <h3>Verify</h3>
-        <p data-t="guard-verify">Guard verifies your log chain has not been tampered with.</p>
+        <p data-t="guard-verify">Guard verifies your log chain has not been tampered with. Seal it with your SSH key so a rewrite shows.</p>
       </div>
     </div>
   </section>
@@ -498,7 +508,7 @@ sunriser rule list</code></pre>
         <code>decision</code><span data-t="field-decision">Allowed or blocked by your rules.</span>
         <code>agent</code><span data-t="field-agent">The agent process that started the call.</span>
         <code>prev</code><span data-t="field-prev">The hash of the previous line. It chains the log.</span>
-        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Keep it away from your agent and compare it next time.</span>
+        <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Keep it away from your agent and check it next time with <code>verify --head</code>.</span>
       </div>
     </div>
   </section>
