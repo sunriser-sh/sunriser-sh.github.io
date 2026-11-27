@@ -222,10 +222,10 @@ Sunriser is not a marketplace or a hosted service. It does not score risk or col
 Nightstar: ship your apps on any Kubernetes cluster
 
 ## description-nightstar
-Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
+PaaS solution for Kubernetes
 
 ## nightstar-sub (fits 60)
-Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
+PaaS solution for Kubernetes
 
 ## nightstar-deploy
 Ship your app to your Kubernetes cluster without a Dockerfile or YAML.
