@@ -182,15 +182,14 @@ section > p { margin-top: 20px; max-width: 64ch; color: var(--mute); }
 }
 
 /* product family */
-.family { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 32px; margin-top: 56px; }
+.family { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; margin-top: 56px; }
 .family a { display: block; padding-top: 24px; border-top: 1px solid var(--line); }
 .family a:hover h3 { color: var(--sun); }
 .family h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; margin: 14px 0 8px; }
 .family p { color: var(--mute); font-size: 15px; }
 .tag { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
 .tag.on { color: var(--ok); }
-@media (max-width: 1000px) { .family { grid-template-columns: 1fr 1fr; gap: 40px 32px; } }
-@media (max-width: 600px) { .family { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 760px) { .family { grid-template-columns: 1fr; gap: 32px; } }
 h2 .tag { vertical-align: middle; margin-left: 12px; }
 
 /* ascii sunrise block */
@@ -238,7 +237,6 @@ footer .end { margin-left: auto; }
     <div class="links">
       <a href="#products">Products</a>
       <a href="#guard">Guard</a>
-      <a href="#nightstar">Nightstar</a>
       <a href="#warrant">Warrant</a>
       <a href="#hub">Hub</a>
     </div>
@@ -390,17 +388,12 @@ sunriser mcp set github --allow <b>'get_*,list_*,search_*'</b></code></pre>
   </section>
 
   <section id="products">
-    <h2><span data-t="products">The four parts of sunriser</span></h2>
+    <h2><span data-t="products">The three parts of sunriser</span></h2>
     <div class="family">
       <a href="#guard">
         <span class="tag on">Preview</span>
         <h3>Guard</h3>
         <p data-t="card-guard">Action Guardrails for your MCP servers and CLI tools. Blocks unneeded agent actions and audits every call.</p>
-      </a>
-      <a href="#nightstar">
-        <span class="tag">Soon</span>
-        <h3>Nightstar</h3>
-        <p data-t="card-nightstar">A platform as a service for your apps. Build, Deploy, and Maintain with it.</p>
       </a>
       <a href="#warrant">
         <span class="tag">Soon</span>
@@ -510,15 +503,6 @@ sunriser mcp set github --allow <b>'get_*,list_*,search_*'</b></code></pre>
         <code>prev</code><span data-t="field-prev">The hash of the previous line. It chains the log.</span>
         <code>head</code><span data-t="field-head">Printed by <code>verify</code>. Keep it away from your agent and check it next time with <code>verify --head</code>.</span>
       </div>
-    </div>
-  </section>
-
-  <section id="nightstar">
-    <h2>Nightstar <span class="tag">Soon</span><br><span class="dim" data-t="nightstar-sub">Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.</span></h2>
-    <div class="rows">
-      <div><code>nightstar deploy</code><p data-t="nightstar-deploy">Ship your app to your Kubernetes cluster without a Dockerfile or YAML.</p></div>
-      <div><code>nightstar process scale web=3</code><p data-t="nightstar-scale">Scale each process of your app.</p></div>
-      <div><code>nightstar logs</code><p data-t="nightstar-logs">Monitor your app with logs and incidents.</p></div>
     </div>
   </section>
 

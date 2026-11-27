@@ -105,13 +105,10 @@ Tells agents what action they cannot do, so they know in advance.
 # The product cards
 
 ## products
-The four parts of sunriser
+The three parts of sunriser
 
 ## card-guard (fits 110)
 Action Guardrails for your MCP servers and CLI tools. Blocks unneeded agent actions and audits every call.
-
-## card-nightstar (fits 110)
-A platform as a service for your apps. Build, Deploy, and Maintain with it.
 
 ## card-warrant (fits 110)
 Least-privilege identity for each agent. Short-lived access that limits the blast radius.
@@ -179,19 +176,6 @@ The hash of the previous line. It chains the log.
 ## field-head
 Printed by `verify`. Keep it away from your agent and check it next time with `verify --head`.
 
-# Nightstar
-
-## nightstar-sub (fits 60)
-Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
-
-## nightstar-deploy
-Ship your app to your Kubernetes cluster without a Dockerfile or YAML.
-
-## nightstar-scale
-Scale each process of your app.
-
-## nightstar-logs
-Monitor your app with logs and incidents.
 # Warrant
 
 ## warrant-sub (fits 60)
