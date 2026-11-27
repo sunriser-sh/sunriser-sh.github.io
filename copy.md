@@ -101,7 +101,7 @@ The four parts of sunriser
 ## card-guard (fits 110)
 Action Guardrails for your MCP servers and CLI tools. Blocks unneeded agent actions and audits every call.
 
-## card-sky (fits 110)
+## card-nightstar (fits 110)
 A platform as a service for your apps. Build, Deploy, and Maintain with it.
 
 ## card-warrant (fits 110)
@@ -170,18 +170,18 @@ The hash of the previous line. It chains the log.
 ## field-head
 Printed by `verify`. Keep it away from your agent and compare it next time.
 
-# Sky
+# Nightstar
 
-## sky-sub (fits 60)
+## nightstar-sub (fits 60)
 Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
 
-## sky-deploy
+## nightstar-deploy
 Ship your app to your Kubernetes cluster without a Dockerfile or YAML.
 
-## sky-scale
+## nightstar-scale
 Scale each process of your app.
 
-## sky-logs
+## nightstar-logs
 Monitor your app with logs and incidents.
 # Warrant
 
