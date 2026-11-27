@@ -47,7 +47,25 @@
   <div class="setup">
     <div class="setup-copy">
       <span class="label">Step 2</span>
-      <h3 data-t="ns-step2-title">Deploy your first app</h3>
+      <h3 data-t="ns-step2-title">Create a cluster in your cloud</h3>
+      <p data-t="ns-step2-note">DigitalOcean, AWS, GCP, Azure, Linode, Hetzner and more.</p>
+    </div>
+    <div>
+      <div class="panel">
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="ns-cluster-1">Create an API token in your DigitalOcean account first.</span></s>
+export DIGITALOCEAN_TOKEN=...
+
+<s># <span data-t="ns-cluster-2">Creates the cluster and installs nightstar on it.</span></s>
+nightstar cluster create prod <b>--provider digitalocean</b></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="setup">
+    <div class="setup-copy">
+      <span class="label">Step 3</span>
+      <h3 data-t="ns-step3-title">Deploy your first app</h3>
     </div>
     <div>
       <div class="panel">
@@ -55,8 +73,8 @@
 <pre><code><s># <span data-t="ns-deploy-1">In any app folder with a Procfile. Detects the stack and writes the config.</span></s>
 nightstar init
 
-<s># <span data-t="ns-deploy-2">Creates a local cluster, builds your app, and waits until it runs.</span></s>
-nightstar deploy <b>--to local</b>
+<s># <span data-t="ns-deploy-2">Builds your app and deploys it to the cluster you just made.</span></s>
+nightstar deploy <b>--to existing</b>
 
 <s># <span data-t="ns-deploy-3">See it in the browser.</span></s>
 nightstar open</code></pre>

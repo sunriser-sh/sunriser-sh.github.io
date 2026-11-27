@@ -243,13 +243,25 @@ Install the CLI
 The installer opens with the first release.
 
 ## ns-step2-title
+Create a cluster in your cloud
+
+## ns-step2-note
+DigitalOcean, AWS, GCP, Azure, Linode, Hetzner and more.
+
+## ns-cluster-1
+Create an API token in your DigitalOcean account first.
+
+## ns-cluster-2
+Creates the cluster and installs nightstar on it.
+
+## ns-step3-title
 Deploy your first app
 
 ## ns-deploy-1
 In any app folder with a Procfile. Detects the stack and writes the config.
 
 ## ns-deploy-2
-Creates a local cluster, builds your app, and waits until it runs.
+Builds your app and deploys it to the cluster you just made.
 
 ## ns-deploy-3
 See it in the browser.
