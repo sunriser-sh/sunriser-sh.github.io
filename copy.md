@@ -4,14 +4,14 @@ Every text on the page has a `##` line with its name. The text sits under it.
 Change the text. Leave the `##` lines as they are.
 
 Then commit and push. GitHub builds the page from this file and publishes it.
-To look before you push, run `python3 build.py` and open `index.html`.
-The `index.html` in the repo may show older text. The build fills in the new text.
+To look before you push, run `python3 build.py`, then `python3 -m http.server`.
+Open http://localhost:8000. The pages in the repo may show older text. The build fills in the new text.
 
 - `` `word` `` shows as code. `*word*` shows as highlighted. No other markdown works.
 - A line that starts with one `#` is only a divider, like this title.
 - "(fits 60)" after a name means about 60 characters fit before the line wraps.
 
-# Browser tab and search result
+# Sunriser page: browser tab and search result
 
 ## title
 Sunriser: Secure your ADLC
@@ -216,7 +216,27 @@ What stays out
 ## out
 Sunriser is not a marketplace or a hosted service. It does not score risk or collect your telemetry.
 
-# Bottom of the page
+# Nightstar page
+
+## title-nightstar
+Nightstar: ship your apps on any Kubernetes cluster
+
+## description-nightstar
+Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
+
+## nightstar-sub (fits 60)
+Simplified way to ship, scale, and monitor your apps on any Kubernetes cluster securely.
+
+## nightstar-deploy
+Ship your app to your Kubernetes cluster without a Dockerfile or YAML.
+
+## nightstar-scale
+Scale each process of your app.
+
+## nightstar-logs
+Monitor your app with logs and incidents.
+
+# Every page: bottom
 
 ## footer
 Open source soon

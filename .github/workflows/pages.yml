@@ -20,8 +20,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
-      # ponytail: the site is one page and one picture. Copy more into _site when it grows.
-      - run: python3 build.py && mkdir _site && cp index.html impression-sunrise.webp _site/
+      # ponytail: the site is a few pages. Add a new page folder to this line.
+      - run: python3 build.py && mkdir _site && cp -r index.html style.css site.js impression-sunrise.webp nightstar _site/
       - uses: actions/upload-pages-artifact@v5
       - id: deploy
         uses: actions/deploy-pages@v5

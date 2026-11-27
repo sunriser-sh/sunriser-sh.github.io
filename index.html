@@ -4,230 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-t="title">Sunriser: Secure your ADLC</title>
-<meta name="description" content="A Continuous-Security Approach for AI SDLC. Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve.">
+<meta name="description" data-t="description" content="A Continuous-Security Approach for AI SDLC. Sunriser helps secure systems continuously as models, data, dependencies, and deployment environments evolve.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #171717;
-  --bg-2: #1e1e1e;
-  --line: #2a2a2a;
-  --fg: #ececea;
-  --dim: rgba(236, 236, 234, .42);
-  --mute: rgba(236, 236, 234, .62);
-  --sun: #ff5a1f;
-  --ok: #7fd18b;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-* { box-sizing: border-box; margin: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg); color: var(--fg);
-  font: 400 16px/1.5 Inter, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-code, pre { font-family: var(--mono); }
-.wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
-@media (max-width: 720px) { .wrap { padding: 0 16px; } }
-
-/* announcement */
-
-/* nav */
-nav { display: flex; align-items: center; gap: 32px; height: 64px; }
-.logo { font-weight: 500; font-size: 18px; letter-spacing: -.4px; display: flex; align-items: center; gap: 8px; }
-.logo i { width: 14px; height: 7px; background: var(--sun); border-radius: 14px 14px 0 0; display: inline-block; }
-nav .links { display: flex; gap: 28px; font-size: 14px; color: var(--mute); }
-nav .links a:hover { color: var(--fg); }
-nav .end { margin-left: auto; display: flex; gap: 8px; }
-@media (max-width: 720px) { nav .links { display: none; } }
-
-.btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; cursor: pointer; border: 0; font-family: inherit; }
-.btn.light { background: var(--fg); color: #111; }
-.btn.ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px #3a3a3a; }
-.btn.ghost:hover { box-shadow: inset 0 0 0 1px #5a5a5a; }
-
-/* type */
-h1, h2 { font-weight: 400; letter-spacing: -.026em; line-height: 1.15; }
-h1 { font-size: clamp(30px, 4.2vw, 44px); }
-h2 { font-size: clamp(28px, 3.6vw, 40px); }
-.dim { color: var(--dim); }
-.label { font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
-
-/* hero */
-.hero { display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center; padding: 72px 0 48px; }
-/* The picture is 220 pixels across and is scaled up. Pixelated keeps each one a sharp square. */
-/* It is dimmed so it sits behind the headline, like a background. */
-.hero img { display: block; width: 100%; height: auto; border-radius: 12px; image-rendering: pixelated; opacity: .4; }
-/* The credit shows only while the pointer is over the picture. Screen readers still read it. */
-.hero figure { position: relative; }
-.hero figcaption { position: absolute; left: 10px; bottom: 10px; padding: 4px 8px; border-radius: 6px; background: rgba(17, 17, 17, .82); font-size: 12px; opacity: 0; transition: opacity .15s; pointer-events: none; }
-.hero figure:hover figcaption { opacity: 1; }
-@media (max-width: 1000px) {
-  .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; }
-  /* Twice the picture's own width, so every pixel stays a whole square. */
-  .hero figure { max-width: 440px; }
-}
-.hero .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-.soon { margin-top: 32px; color: var(--mute); font-size: 15px; }
-.soon .tag { margin-right: 12px; }
-.install { font-family: var(--mono); font-size: 13px; font-weight: 400; }
-.install span { color: var(--dim); }
-
-/* product window */
-.stage { position: relative; margin-top: 8px; padding: 56px 0 0; overflow: hidden; }
-.stage::before { content: ""; position: absolute; inset: 0 0 35% 0; background: radial-gradient(120% 90% at 50% 100%, #ff7a2f 0%, #c8381a 30%, #3a1410 62%, transparent 80%); opacity: .9; }
-.win { position: relative; margin: 0 56px; background: #111; border-radius: 12px 12px 0 0; box-shadow: 0 0 0 1px #2c2c2c, 0 40px 80px rgba(0,0,0,.5); display: grid; grid-template-columns: 1fr 300px; min-height: 420px; font-size: 13px; container-type: inline-size; }
-.win header { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-bottom: 1px solid var(--line); color: var(--mute); font-size: 12px; }
-.win header b { width: 12px; height: 12px; border-radius: 50%; background: #3a3a3a; }
-.win header span { margin-left: 12px; font-family: var(--mono); }
-/* The longest log line is 95 characters. The text size follows the window, so that line fits beside the chat. */
-.term { padding: 18px 20px; font: 12.5px/1.75 var(--mono); font-size: clamp(10px, calc((100cqw - 340px) / 59), 12.5px); color: var(--mute); overflow-x: auto; white-space: pre; }
-.term .p { color: var(--fg); }
-.term .b { color: var(--sun); }
-.term .o { color: var(--ok); }
-.side { border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
-.msg { background: var(--bg-2); border-radius: 8px; padding: 12px; line-height: 1.55; color: var(--fg); }
-.msg.agent { background: none; padding: 0 2px; color: var(--mute); }
-.msg.agent em { font-style: normal; color: var(--sun); font-family: var(--mono); font-size: 12px; }
-.ask { margin-top: auto; background: var(--bg-2); border-radius: 8px; padding: 12px; color: var(--dim); }
-@media (max-width: 900px) {
-  .win { grid-template-columns: 1fr; margin: 0; }
-  .side { display: none; }
-  .term { font-size: clamp(10px, calc((100cqw - 40px) / 59), 12.5px); }
-  .stage { padding-top: 32px; }
-}
-
-/* setup */
-.setup { display: grid; grid-template-columns: 320px 1fr; gap: 56px; padding-top: 72px; }
-.setup + .setup { padding-top: 48px; }
-.setup-copy h3 { margin-top: 10px; }
-.setup-copy h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; }
-.setup-copy p { color: var(--mute); margin-top: 10px; }
-.setup-copy code { font-size: 13px; }
-.add, .panel b { color: var(--sun); font-weight: 400; }
-.tabs { display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; color: var(--dim); }
-.tabs button { background: none; border: 0; color: inherit; font: inherit; padding: 0 0 8px; cursor: pointer; }
-.tabs button:hover { color: var(--mute); }
-.tabs button[aria-selected="true"] { color: var(--fg); box-shadow: inset 0 -1px 0 var(--fg); }
-.panel { margin-top: 16px; background: #111; border-radius: 10px; overflow: hidden; }
-.panel[hidden] { display: none; }
-.panel header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; font: 12px var(--mono); color: var(--dim); background: #141414; }
-.panel pre { margin: 0; padding: 20px; font: 13px/1.8 var(--mono); color: var(--fg); overflow-x: auto; }
-.panel s { text-decoration: none; color: var(--dim); }
-.copy { background: none; border: 0; color: var(--mute); font: 500 12px Inter, sans-serif; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
-.copy:hover { background: #222; color: var(--fg); }
-:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; border-radius: 4px; }
-.setup > div { min-width: 0; }
-.term, .panel pre, .json { scrollbar-width: thin; scrollbar-color: #333 transparent; }
-@media (max-width: 900px) { .setup { grid-template-columns: 1fr; gap: 28px; padding-top: 48px; } }
-
-/* guarded run */
-.trace-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 360px); gap: 40px; align-items: end; margin-top: 52px; }
-.trace-intro h3 { margin-top: 12px; font-size: clamp(26px, 3.2vw, 36px); font-weight: 400; line-height: 1.12; letter-spacing: -.03em; }
-.trace-intro p { margin-top: 14px; max-width: 58ch; color: var(--mute); }
-.trace-legend { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 16px; color: var(--mute); font: 12px var(--mono); }
-.trace-legend span { display: inline-flex; align-items: center; gap: 7px; }
-.trace-legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-.trace-legend .allow i { background: var(--ok); }
-.trace-legend .block i { background: var(--sun); }
-.trace-legend .dry i { background: #b69cff; }
-.trace-card { margin-top: 32px; background: #111; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-.trace-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
-.trace-kicker { display: block; color: var(--dim); font: 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
-.trace-title { display: block; margin-top: 5px; color: var(--fg); font-size: 14px; }
-.trace-toggle { flex: 0 0 auto; height: 30px; padding: 0 12px; border: 1px solid #3a3a3a; border-radius: 999px; background: transparent; color: var(--mute); font: 12px var(--mono); cursor: pointer; }
-.trace-toggle:hover { border-color: #5a5a5a; color: var(--fg); }
-.trace-toggle::before { content: "Ⅱ"; margin-right: 7px; color: var(--sun); }
-.trace-card.is-paused .trace-toggle::before { content: "▶"; }
-.trace-chart { padding: 22px 20px 16px; overflow-x: auto; }
-.trace-axis, .trace-row { display: grid; grid-template-columns: 116px minmax(480px, 1fr); gap: 16px; min-width: 612px; }
-.trace-axis { color: var(--dim); font: 11px var(--mono); }
-.trace-axis > div { display: flex; justify-content: space-between; padding: 0 1px 9px; }
-.trace-row { min-height: 42px; align-items: center; }
-.trace-lane { color: var(--mute); font: 12px var(--mono); }
-.trace-track { position: relative; height: 26px; border-top: 1px solid #252525; border-bottom: 1px solid #252525; background: repeating-linear-gradient(90deg, transparent 0 calc(20% - .5px), #292929 calc(20% - .5px) 20%); }
-.trace-bar { position: absolute; top: 4px; left: var(--x); width: var(--w); min-width: 5px; height: 17px; border-radius: 3px; transform-origin: left center; animation: trace-grow 5.4s var(--delay) infinite ease-in-out; }
-.trace-bar::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.52) 50%, transparent 80%); transform: translateX(-120%); animation: trace-sheen 2.6s calc(var(--delay) + 1.2s) infinite; }
-.trace-bar.allow { background: var(--ok); box-shadow: 0 0 14px rgba(127,209,139,.18); }
-.trace-bar.block { background: var(--sun); box-shadow: 0 0 14px rgba(255,90,31,.2); }
-.trace-bar.dry { background: #b69cff; box-shadow: 0 0 14px rgba(182,156,255,.18); }
-.trace-card.is-paused .trace-bar, .trace-card.is-paused .trace-bar::after { animation-play-state: paused; }
-.trace-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding: 14px 20px; border-top: 1px solid var(--line); color: var(--dim); font: 11px var(--mono); }
-.trace-foot b { color: var(--fg); font-weight: 400; }
-.trace-foot code { color: var(--sun); }
-@keyframes trace-grow { 0%, 8% { opacity: .3; transform: scaleX(.08); } 24%, 82% { opacity: 1; transform: scaleX(1); } 100% { opacity: .3; transform: scaleX(.08); } }
-@keyframes trace-sheen { 0%, 35% { transform: translateX(-120%); } 70%, 100% { transform: translateX(120%); } }
-@media (prefers-reduced-motion: reduce) {
-  .trace-bar, .trace-bar::after { animation: none; transform: none; }
-}
-@media (max-width: 720px) {
-  .trace-intro { grid-template-columns: 1fr; gap: 22px; }
-  .trace-legend { justify-content: flex-start; }
-  .trace-head { align-items: flex-start; }
-}
-
-/* pillars */
-section { padding: 120px 0 0; }
-section > p { margin-top: 20px; max-width: 64ch; color: var(--mute); }
-.pillars { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 56px; border-top: 1px solid var(--line); }
-.pillars div { padding: 28px 28px 0 0; }
-.pillars div + div { padding-left: 28px; border-left: 1px solid var(--line); }
-.pillars h3 { font-weight: 500; font-size: 16px; margin: 14px 0 6px; }
-.pillars p { color: var(--mute); font-size: 15px; }
-@media (max-width: 800px) {
-  .pillars { grid-template-columns: 1fr; }
-  .pillars div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); margin-top: 28px; }
-}
-
-/* product family */
-.family { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; margin-top: 56px; }
-.family a { display: block; padding-top: 24px; border-top: 1px solid var(--line); }
-.family a:hover h3 { color: var(--sun); }
-.family h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; margin: 14px 0 8px; }
-.family p { color: var(--mute); font-size: 15px; }
-.tag { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
-.tag.on { color: var(--ok); }
-@media (max-width: 760px) { .family { grid-template-columns: 1fr; gap: 32px; } }
-h2 .tag { vertical-align: middle; margin-left: 12px; }
-
-/* ascii sunrise block */
-.sunblock { position: relative; background: var(--sun); color: #fff; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; }
-.sunblock pre { position: absolute; inset: 0; font: 12px/14px var(--mono); color: rgba(255,255,255,.78); white-space: pre; overflow: hidden; user-select: none; }
-/* The art fades out on the left, where the words sit. */
-.sunblock pre { -webkit-mask-image: linear-gradient(90deg, transparent 50%, #000 78%); mask-image: linear-gradient(90deg, transparent 50%, #000 78%); }
-.sunblock .words { position: relative; padding: 40px; max-width: 780px; }
-.sunblock h2 { font-weight: 500; letter-spacing: -.035em; }
-.sunblock p { margin-top: 12px; font-weight: 500; font-size: 15px; max-width: 540px; }
-@media (max-width: 720px) {
-  .sunblock .words { padding: 24px 16px; }
-  /* On a phone the words fill the width, so the art keeps to the top. */
-  .sunblock pre { -webkit-mask-image: linear-gradient(#000 30%, transparent 62%); mask-image: linear-gradient(#000 30%, transparent 62%); }
-}
-
-/* record */
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
-@media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 32px; } }
-.fields { display: grid; grid-template-columns: max-content 1fr; gap: 14px 24px; font-size: 15px; color: var(--mute); }
-.fields code { color: var(--fg); font-size: 13px; padding-top: 2px; }
-.fields span code { padding: 0; }
-.json { font: 13px/1.8 var(--mono); color: var(--mute); background: #111; border-radius: 10px; padding: 20px; overflow-x: auto; white-space: pre; align-self: start; }
-.json .k { color: var(--fg); }
-.json .b { color: var(--sun); }
-
-/* agents list */
-.rows { margin-top: 48px; border-top: 1px solid var(--line); }
-.rows div { display: grid; grid-template-columns: 320px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
-.rows code { font-size: 14px; }
-.rows p { color: var(--mute); }
-@media (max-width: 720px) { .rows div { grid-template-columns: 1fr; gap: 6px; } }
-
-/* footer */
-footer { margin-top: 120px; border-top: 1px solid var(--line); padding: 28px 0 48px; font-size: 13px; color: var(--dim); display: flex; gap: 24px; flex-wrap: wrap; }
-footer a:hover { color: var(--fg); }
-footer .end { margin-left: auto; }
-</style>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -235,10 +16,8 @@ footer .end { margin-left: auto; }
   <nav>
     <a class="logo" href="/"><i></i>sunriser</a>
     <div class="links">
-      <a href="#products">Products</a>
-      <a href="#guard">Guard</a>
-      <a href="#warrant">Warrant</a>
-      <a href="#hub">Hub</a>
+      <a href="/" aria-current="page">Sunriser</a>
+      <a href="/nightstar/">Nightstar</a>
     </div>
   </nav>
 
@@ -248,7 +27,7 @@ footer .end { margin-left: auto; }
     <p class="soon"><span class="tag on">Private preview</span><span data-t="soon">The source will be public soon.</span></p>
     </div>
     <figure>
-      <img src="impression-sunrise.webp" width="220" height="171" alt="A painting of an orange sun rising over a misty harbour, with small boats on the water, redrawn in large pixels.">
+      <img src="/impression-sunrise.webp" width="220" height="171" alt="A painting of an orange sun rising over a misty harbour, with small boats on the water, redrawn in large pixels.">
       <figcaption data-t="hero-credit">Claude Monet, Impression, Sunrise, 1872</figcaption>
     </figure>
   </div>
@@ -543,46 +322,6 @@ sunriser mcp set github --allow <b>'get_*,list_*,search_*'</b></code></pre>
   </footer>
 </div>
 
-<script>
-document.querySelectorAll(".copy").forEach(b => b.onclick = async () => {
-  try { await navigator.clipboard.writeText(b.closest(".panel").querySelector("code").innerText); b.textContent = "Copied"; } catch { b.textContent = "Select to copy"; }
-  setTimeout(() => b.textContent = "Copy", 1400);
-});
-
-// Each step has its own tabs, so a click only changes the step it is in.
-document.querySelectorAll("[data-tab]").forEach(t => t.onclick = () => {
-  const step = t.closest(".setup");
-  step.querySelectorAll("[data-tab]").forEach(x => x.setAttribute("aria-selected", x === t));
-  step.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
-});
-
-const trace = document.getElementById("trace-card");
-const traceToggle = document.getElementById("trace-toggle");
-if (trace && traceToggle) traceToggle.onclick = () => {
-  const paused = trace.classList.toggle("is-paused");
-  traceToggle.setAttribute("aria-pressed", paused);
-  traceToggle.querySelector("span").textContent = paused ? "Play" : "Pause";
-};
-
-// ASCII sunrise: density falls off with distance from a sun below the bottom edge.
-const pre = document.getElementById("ascii");
-function draw() {
-  const cols = Math.ceil(pre.clientWidth / 7.2), rows = Math.ceil(pre.clientHeight / 14);
-  const cx = cols * .72, cy = rows * 1.05, chars = " .-->>00";
-  let out = "";
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      const d = Math.hypot((x - cx) / 2.1, y - cy) / rows;
-      const ray = Math.sin(Math.atan2(y - cy, x - cx) * 14) * .06;
-      const v = 1.15 - d + ray;
-      out += chars[Math.max(0, Math.min(chars.length - 1, Math.floor(v * chars.length)))];
-    }
-    out += "\n";
-  }
-  pre.textContent = out;
-}
-draw();
-addEventListener("resize", draw);
-</script>
+<script src="/site.js"></script>
 </body>
 </html>

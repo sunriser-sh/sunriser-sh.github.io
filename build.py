@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the text in copy.md into index.html. Run: python3 build.py"""
+"""Write the text in copy.md into every page. Run: python3 build.py"""
 import html
 import re
 import sys
@@ -48,12 +48,17 @@ def text(key):
 # ponytail: a regex, not an HTML parser. A data-t element must not hold
 # another element of its own tag. Use a real parser if that ever gets in the way.
 slot = re.compile(r'(<(\w+)\b[^>]*\bdata-t="([\w-]+)"[^>]*>)(.*?)(</\2>)', re.S)
-page = here / "index.html"
-out = slot.sub(lambda m: m[1] + render(text(m[3])) + m[5], page.read_text())
-# The description lives in an attribute, so it has its own rule.
-out = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m[1] + html.escape(text("description")), out)
+# One page per product: Sunriser at the root, then Nightstar. All take their text from copy.md.
+pages = ["index.html", "nightstar/index.html"]
+outs = {}
+for name in pages:
+    out = slot.sub(lambda m: m[1] + render(text(m[3])) + m[5], (here / name).read_text())
+    # The description lives in an attribute, so it has its own rule.
+    meta = r'(<meta name="description" data-t="([\w-]+)" content=")[^"]*'
+    outs[name] = re.sub(meta, lambda m: m[1] + html.escape(text(m[2])), out)
 
 if extra := sorted(copy.keys() - used):
     sys.exit(f"copy.md has names the page does not use: {', '.join(extra)}")
-page.write_text(out)
-print(f"{len(used)} texts written to index.html")
+for name, out in outs.items():
+    (here / name).write_text(out)
+print(f"{len(used)} texts written to {len(pages)} pages")
