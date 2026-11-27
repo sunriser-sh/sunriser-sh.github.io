@@ -30,6 +30,40 @@
     </div>
   </section>
 
+  <div class="setup">
+    <div class="setup-copy">
+      <span class="label">Step 1</span>
+      <h3 data-t="ns-step1-title">Install the CLI</h3>
+      <p data-t="ns-step1-note">The installer opens with the first release.</p>
+    </div>
+    <div>
+      <div class="panel">
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code>curl -fsSL https://get.nightstar.sh | sh</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="setup">
+    <div class="setup-copy">
+      <span class="label">Step 2</span>
+      <h3 data-t="ns-step2-title">Deploy your first app</h3>
+    </div>
+    <div>
+      <div class="panel">
+        <header><span>Terminal</span><button class="copy">Copy</button></header>
+<pre><code><s># <span data-t="ns-deploy-1">In any app folder with a Procfile. Detects the stack and writes the config.</span></s>
+nightstar init
+
+<s># <span data-t="ns-deploy-2">Creates a local cluster, builds your app, and waits until it runs.</span></s>
+nightstar deploy <b>--to local</b>
+
+<s># <span data-t="ns-deploy-3">See it in the browser.</span></s>
+nightstar open</code></pre>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <span>sunriser.sh</span>
     <span class="end" data-t="footer">Open source soon</span>

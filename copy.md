@@ -236,6 +236,24 @@ Scale each process of your app.
 ## nightstar-logs
 Monitor your app with logs and incidents.
 
+## ns-step1-title
+Install the CLI
+
+## ns-step1-note
+The installer opens with the first release.
+
+## ns-step2-title
+Deploy your first app
+
+## ns-deploy-1
+In any app folder with a Procfile. Detects the stack and writes the config.
+
+## ns-deploy-2
+Creates a local cluster, builds your app, and waits until it runs.
+
+## ns-deploy-3
+See it in the browser.
+
 # Every page: bottom
 
 ## footer
